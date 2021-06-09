@@ -1,0 +1,49 @@
+<div class="subHeading">
+  <h3>Manage Schedules</h3>
+</div>
+<div class="contents">
+  <div style="width: 100%; text-align: right">
+    <a routerLink="">
+      <button class="btn btn-primary">Add Schedules</button>
+    </a>
+  </div>
+  <div class="flex-row">
+      <div class="">
+          <label>Select Airline</label>
+          <select name="airline" [(ngModel)]="searchModel.airlineName">
+              <option value=""></option>
+            <option *ngFor="let airline of airlineList" value="{{airline.airlineName}}">{{airline.airlineName}}</option>
+          </select>          
+      </div>
+      <div class="">
+        <label for="">Flight Number</label>
+        <input type="text" name="flightNumber" [(ngModel)]="searchModel.flightNo">         
+    </div>
+    <div class="">
+      <label for="">Instrument Used</label>
+      <input type="text" name="instrumentUsed">         
+  </div>
+  <div>
+      <button class="btn" (click)="onSearch()">Search</button>
+  </div>
+  </div>
+  <div class="scroll">
+    <table class="table">
+      <tbody>
+        <tr *ngFor="let schedule of scheduleList">
+          <td>
+            <img src="{{schedule.airline?.logoUrl}}" alt="Logo" class="img-box" />
+          </td>
+          <td>{{ schedule.airline?.airlineName }}</td>
+          <td>{{ schedule.from }}</td>
+          <td>{{ schedule.to }}</td>
+          <td>
+            {{ schedule.flightNo }}
+            <br />
+            <button class="btn">View Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

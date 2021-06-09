@@ -1,0 +1,41 @@
+<div class="contents">
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="">Username</label>
+            <input
+              type="text"
+              #username="ngModel"
+              name="username"
+              [(ngModel)]="userModel.username"
+              class="form-control"
+              [class.is-invalid]="username.invalid && username.touched"
+              required
+            />
+            <small
+              class="text-danger"
+              [class.d-none]="username.valid || username.untouched"
+              >This is require field</small
+            >
+          </div>
+          <div class="form-group">
+              <label for="">Password</label>
+              <input
+                type="password"
+                #password="ngModel"
+                name="password"
+                [(ngModel)]="userModel.password"
+                class="form-control"
+                [class.is-invalid]="password.invalid && password.touched"
+                required
+              />
+              <small
+                class="text-danger"
+                [class.d-none]="password.valid || password.untouched"
+                >This is require field</small
+              >
+            </div>
+
+            <input type="submit" [disabled]="loginForm.invalid" value="LogIn" class="btn btn-primary" />
+        
+    </form>
+</div>

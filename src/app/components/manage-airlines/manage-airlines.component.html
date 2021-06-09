@@ -1,0 +1,26 @@
+
+<div class="subHeading">
+    <h3>Manage Airlines</h3>
+</div>
+<div style="width: 100%; text-align: right">
+    <a routerLink="/addAirline">
+        <button class="btn btn-primary">Add Airline</button>
+    </a>
+  </div>
+<div class="contents">
+    <div>
+        <table class="table">
+            <tbody>
+                <tr *ngFor="let airline of airlineList">
+                    <td>
+                        <img src="{{airline.logoUrl}}" alt="Logo" class="img-box">
+                    </td>
+                    <td>{{airline.airLineName}}</td>
+                    <td>{{airline.contactNumber}}</td>
+                    <td>{{airline.description}}</td>
+                    <td><button class="btn">View Details</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

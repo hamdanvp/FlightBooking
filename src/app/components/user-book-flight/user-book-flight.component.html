@@ -1,0 +1,164 @@
+<div class="subHeading">
+  <h3>Book Flight</h3>
+</div>
+<div class="contents">
+  <div class="tripType">
+    <label class="radio-inline"
+      ><input
+        type="radio"
+        name="tripType"
+        value="oneWay"
+        [(ngModel)]="tripType"
+        (change)="changeTripType($event)"
+      />One Way</label
+    >
+    <label class="radio-inline"
+      ><input
+        type="radio"
+        name="tripType"
+        value="roundTrip"
+        [(ngModel)]="tripType"
+        (change)="changeTripType($event)"
+      />Round Trip</label
+    >
+  </div>
+  <div class="flex-row from-to">
+    <div class="float-child">
+      <label class="form-check-label">From:</label>
+      <input
+        type="text"
+        name="From"
+        id=""
+        [(ngModel)]="fromLocation"
+        (focus)="focusFunction($event)"
+        (focusout)="fromFocusOut($event)"
+      />
+    </div>
+    <div class="float-child">
+      <label class="form-check-label">To:</label>
+      <input
+        type="text"
+        name="To"
+        id=""
+        [(ngModel)]="toLocation"
+        (focus)="focusFunction($event)"
+        (focusout)="toFocusOut($event)"
+      />
+    </div>
+  </div>
+  <br />
+  <div class="flex-row flights">
+    <div class="from-flights" style="width: 50%">
+      <div class="float-child">
+        <label class="form-check-label">Ownward Journey:</label>
+        <input
+          type="date"
+          name="fromDate"
+          [ngModel]="onwardDate | date: 'yyyy-MM-dd'"
+          (ngModelChange)="onwardDateChange($event)"
+        />
+      </div>
+      <div class="list-flights" style="width: 100%">
+        <table class="table">
+          <thead>
+            <tr>
+              <td>Airline</td>
+              <td>Price</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let ownwardJourney of ownwardJourneyList; let i = index"
+              (click)="setOnewayPrice(i, ownwardJourney.price,ownwardJourney.id)"
+              [class.active]="i == selectedOneWayRowIndex"
+            >
+              <td>
+                <label>{{ ownwardJourney.airline?.airlineName }}</label
+                ><br />
+                <img
+                  src="{{ ownwardJourney.airline?.logoUrl }}"
+                  alt="Logo"
+                  class="img-box"
+                />
+              </td>
+              <td>{{ ownwardJourney.price }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="oneline">
+          <label for="">Meal Preference</label>
+          <select name="mealPreference" class="">
+            <option>None</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div
+      class="to-flights"
+      style="width: 50%; border-left: 2px solid #a09999"
+      *ngIf="tripType == '' || tripType == 'roundTrip'"
+    >
+      <div class="float-child">
+        <label class="form-check-label">Return Journey:</label>
+        <input
+          type="date"
+          name="toDate"
+          [ngModel]="returnDate | date: 'yyyy-MM-dd'"
+          (ngModelChange)="returnDateChange($event)"
+        />
+      </div>
+      <div class="list-flights" style="width: 100%">
+        <table class="table">
+          <thead>
+            <tr>
+              <td>Airline</td>
+              <td>Price</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let schedule of returnJourneyList; let i = index"
+              (click)="setReturnPrice(i, schedule.price,schedule.id)"
+              [class.active]="i == selectedReturnRowIndex"
+            >
+            <td>
+              <label>{{ schedule.airline?.airlineName }}</label
+              ><br />
+              <img
+                src="{{ schedule.airline?.logoUrl }}"
+                alt="Logo"
+                class="img-box"
+              />
+            </td>
+            <td>{{ schedule.price }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="oneline">
+          <label for="">Meal Preference</label>
+          <select name="mealPreference" class="">
+            <option>None</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex-row">
+    <div class="" style="text-align: left">
+      <label for="">Total Price:</label>
+      <input
+        type="text"
+        name="price"
+        #price="ngModel"
+        [(ngModel)]="totalPrice"
+      />
+    </div>
+    <div style="text-align: right">
+      <button class="btn btn-dark" (click)="openDiscountDialog()">
+        Continue Booking
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div style="width: 100%; text-align: right">
+  <button class="btn btn-secondary" (click)="onLogClick()">{{logButtonName}}</button>
+</div>
+<div class="menu-bar" style="width: 100%">
+  <a routerLink="/bookFlights">Book Flights</a>
+  <a routerLink="/manageBooking" *ngIf="isLogin">Manage Bookings</a>
+  <a routerLink="/bookHistory" *ngIf="isLogin">Booking History</a>
+  <a routerLink="/manageSchedules" *ngIf="isLogin && userData.isAdmin">Manage Schedules</a>
+  <a routerLink="/manageDiscount" *ngIf="isLogin && userData.isAdmin">Manage Discounts</a>
+  <a routerLink="/manageAirlines" *ngIf="isLogin && userData.isAdmin">Manage Airlines</a>
+  <a routerLink="/reports" *ngIf="isLogin && userData.isAdmin">Reports</a>
+</div>

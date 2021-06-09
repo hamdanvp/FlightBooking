@@ -1,0 +1,193 @@
+import { Component, OnInit, Inject } from '@angular/core';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
+import { DatePipe } from '@angular/common';
+
+import { UserService } from 'src/app/services/user.service';
+import { UserDiscountApplyComponent } from '../user-discount-apply/user-discount-apply.component';
+import { scheduleModel } from 'src/app/models/scheduleModel';
+import { LoginServiceService } from 'src/app/services/login-service.service';
+import { UserModel } from 'src/app/models/user';
+
+@Component({
+  selector: 'app-user-book-flight',
+  templateUrl: './user-book-flight.component.html',
+  styleUrls: ['./user-book-flight.component.css'],
+})
+export class UserBookFlightComponent implements OnInit {
+  public ownwardJourneyList: any[] = [];
+  public returnJourneyList:  any[] = [];
+  public totalPrice: number = 0;
+  public oneWayPrice: number = 0;
+  public returnPrice: number = 0;
+  setReturnPrice: Function;
+  selectedReturnRowIndex!: Number;
+  setOnewayPrice: Function;
+  selectedOneWayRowIndex!: Number;
+  startDate = new Date();
+  tripType: string = 'oneWay';
+  oldValue: string = '';
+  fromLocation: string = '';
+  toLocation: string = '';
+  ownwardScheduleId: string = '';
+  returnScheduleId: string = '';
+  public onwardDate: Date = new Date();
+  public returnDate: Date = new Date();
+
+  constructor(
+    private userService: UserService,
+    private dialog: MatDialog,
+    private logService: LoginServiceService
+  ) {
+    this.getOwnwardJourney();
+    this.setReturnPrice = function (index: Number, returnPrice: number,scheduleId:string) {
+      if (this.selectedReturnRowIndex == index) {
+        this.selectedReturnRowIndex = -1;
+        this.returnPrice = 0;
+        this.ownwardScheduleId='';
+      } else {
+        this.selectedReturnRowIndex = index;
+        this.returnPrice = returnPrice;
+        this.ownwardScheduleId=scheduleId;
+      }
+      this.calculateTotal();
+    };
+
+    this.setOnewayPrice = function (index: Number, price: number,scheduleId:string) {
+      if (this.selectedOneWayRowIndex == index) {
+        this.selectedOneWayRowIndex = -1;
+        this.oneWayPrice = 0;
+        this.returnScheduleId='';
+      } else {
+        this.selectedOneWayRowIndex = index;
+        this.oneWayPrice = price;
+        this.returnScheduleId=scheduleId;
+      }
+      this.calculateTotal();
+    };
+  }
+
+  getOwnwardJourney() {
+    let searchModel = {
+      FromLocation: this.fromLocation,
+      ToLocation: this.toLocation,
+      ScheduleDate: this.onwardDate.toISOString(),
+    };
+    this.userService
+      .getScheduleList(searchModel)
+      .subscribe((data: [scheduleModel]) => {
+        this.ownwardJourneyList = data;
+      });
+  }
+
+  getReturnJourney() {
+    let searchModel = {
+      FromLocation: this.toLocation,
+      ToLocation: this.fromLocation,
+      ScheduleDate: this.returnDate.toISOString(),
+    };
+    this.userService
+      .getScheduleList(searchModel)
+      .subscribe((data: [scheduleModel]) => {
+        this.returnJourneyList = data;
+      });
+  }
+
+  public calculateTotal() {
+    this.totalPrice = this.oneWayPrice + this.returnPrice;
+  }
+  isActive(price: number) {
+    return this.oneWayPrice === price;
+  }
+
+  focusFunction(event: any) {
+    this.oldValue = event.target.value;
+  }
+
+  fromFocusOut(event: any) {
+    let newValue = event.target.value;
+    if (newValue != this.oldValue) {
+      this.fromLocation = newValue;
+      if (this.toLocation.trim() == '') return;
+      else {
+        this.getOwnwardJourney();
+        if (this.tripType == 'roundTrip') {
+          this.getReturnJourney();
+        }
+      }
+    }
+  }
+
+  toFocusOut(event: any) {
+    let newValue = event.target.value;
+    if (newValue != this.oldValue) {
+      this.toLocation = newValue;
+      if (this.fromLocation.trim() == '') return;
+      else {
+        this.getOwnwardJourney();
+        if (this.tripType == 'roundTrip') {
+          this.getReturnJourney();
+        }
+      }
+    }
+  }
+
+  public openDiscountDialog(): void {
+    if(this.ownwardScheduleId.trim()==''){
+      alert("Please select ownward journey");
+      return;
+    }
+    if(this.returnScheduleId.trim()=='' && this.tripType=='roundTrip'){
+      alert('Please select return journey');
+      return;
+    }
+
+    
+    let userData: any=this.logService.getUser();
+    if (userData != null) {
+      let dialogRef = this.dialog.open(UserDiscountApplyComponent, {
+        width: '500px',
+        data: {
+          triptype:this.tripType,
+          ownwardJourney:this.ownwardScheduleId,
+          returnJourney:this.returnScheduleId
+        },
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('The dialog was closed');
+        let data = result;
+      });
+    } else {
+      alert('Please login.');
+      return;
+    }
+  }
+
+  changeTripType(event: any) {
+    this.tripType = event.target.value;
+    if(this.tripType=='roundTrip'){
+      this.getReturnJourney();
+    }
+    else{
+      this.returnScheduleId='';
+      this.returnPrice=0;
+      this.calculateTotal();
+    }
+  }
+
+  onwardDateChange(event: any) {
+    this.onwardDate = new Date(event);
+    this.getOwnwardJourney();
+  }
+
+  returnDateChange(event: any) {
+    this.returnDate = new Date(event);
+    this.getOwnwardJourney();
+  }
+
+  ngOnInit(): void {}
+}
