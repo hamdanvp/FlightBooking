@@ -1,1 +1,75 @@
-<p>add-schedules works!</p>
+<div class="subHeading">
+    Add Schedule
+</div>
+<div class="contents">
+    <form  #addAirlineForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="">Flight No</label>
+            <input
+              type="text"
+              id="flightNo"
+              name="flightNo"
+              class="form-control"
+              [(ngModel)]="model.flightNo"
+            />
+          </div>
+          <div class="form-group">
+            <label for="">From</label>
+            <input
+              type="text"
+              id="from"
+              name="from"
+              class="form-control"
+              [(ngModel)]="model.from"
+            />
+            <div class="form-group">
+              <label for="">To</label>
+              <input
+                type="text"
+                id="to"
+                name="to"
+                class="form-control"
+                [(ngModel)]="model.to"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Price</label>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              class="form-control"
+              [(ngModel)]="model.price"
+            />
+          </div>
+          <div class="form-group">
+            <label for="">Seats</label>
+            <input
+              type="number"
+              id="totalSeats"
+              name="totalSeats"
+              class="form-control"
+              [(ngModel)]="model.totalSeats"
+            />
+          </div>
+          <div class="form-group">
+            <label for="">Schedule Date</label>
+            <input
+              type="date"
+              id="sheduleDate"
+              name="sheduleDate"
+              class="form-control"
+              [(ngModel)]="model.sheduleDate"
+            />
+          </div>
+          <div class="form-group">
+              <label>Select Airline</label>
+              <select name="airline" [(ngModel)]="model.airline.id">
+                  <option value=""></option>
+                <option *ngFor="let airline of airlineList" value="{{airline.id}}">{{airline.airlineName}}</option>
+              </select>          
+          </div>
+          <input type="submit" value="Add" class="btn btn-primary" />
+    </form>
+</div>

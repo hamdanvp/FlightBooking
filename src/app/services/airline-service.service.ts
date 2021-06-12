@@ -21,4 +21,15 @@ export class AirlineServiceService {
       }
     );
   }
+
+  addAirlines(body:any): Observable<[any]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
+    const params=JSON.stringify(body);
+    return this.http.post<any>('https://localhost:44318/api/Airline', params, httpOptions);
+  }
 }

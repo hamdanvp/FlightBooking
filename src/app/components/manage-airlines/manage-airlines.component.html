@@ -10,14 +10,23 @@
 <div class="contents">
     <div>
         <table class="table">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>Name</td>
+                    <td>Contact Number</td>
+                    <td>Instrument Used</td>
+                    <td></td>
+                </tr>
+            </thead>
             <tbody>
                 <tr *ngFor="let airline of airlineList">
                     <td>
                         <img src="{{airline.logoUrl}}" alt="Logo" class="img-box">
                     </td>
-                    <td>{{airline.airLineName}}</td>
+                    <td>{{airline.airlineName}}</td>
                     <td>{{airline.contactNumber}}</td>
-                    <td>{{airline.description}}</td>
+                    <td>{{airline.instrumentUsed}}</td>
                     <td><button class="btn">View Details</button></td>
                 </tr>
             </tbody>
