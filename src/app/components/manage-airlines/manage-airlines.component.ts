@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/services/admin.service';
+import { AirlineServiceService } from 'src/app/services/airline-service.service';
 
 @Component({
   selector: 'app-manage-airlines',
@@ -9,8 +10,8 @@ import { AdminService } from 'src/app/services/admin.service';
 export class ManageAirlinesComponent implements OnInit {
   public airlineList: any[] = [];
 
-  constructor(private adminServices: AdminService) {
-    adminServices.getAirlines().subscribe((result) => {
+  constructor(private airlineServices: AirlineServiceService) {
+    airlineServices.getAirlines().subscribe((result) => {
       this.airlineList = result;
     });
   }

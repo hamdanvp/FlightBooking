@@ -9,9 +9,11 @@ import { ManageDiscountsComponent } from './components/manage-discounts/manage-d
 import { ManageSchedulesComponent } from './components/manage-schedules/manage-schedules.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { AddAirlineComponent } from './components/add-airline/add-airline.component';
+import { AddSchedulesComponent } from './components/add-schedules/add-schedules.component';
 import { LoginComponent } from './components/login/login.component'
 import { MenuComponent } from './components/menu/menu.component'
-const routes: Routes = [  
+
+const routes: Routes = [
   {path:'',  component:UserBookFlightComponent},
   {path:'bookFlights',  component:UserBookFlightComponent},
   {path:'bookHistory',  component:UserBookingHistoryComponent},
@@ -21,6 +23,7 @@ const routes: Routes = [
   {path:'manageDiscount',  component:ManageDiscountsComponent},
   {path:'reports',  component:ReportsComponent},
   {path:'addAirline',  component:AddAirlineComponent},
+  {path:'addSchedule',  component:AddSchedulesComponent},
   {path:'menu',  component:MenuComponent},
   {path:'login',  component:LoginComponent}
 ];

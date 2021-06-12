@@ -11,6 +11,7 @@ import { UserDiscountApplyComponent } from '../user-discount-apply/user-discount
 import { scheduleModel } from 'src/app/models/scheduleModel';
 import { LoginServiceService } from 'src/app/services/login-service.service';
 import { UserModel } from 'src/app/models/user';
+import { ScheduleServiceService } from 'src/app/services/schedule-service.service';
 
 @Component({
   selector: 'app-user-book-flight',
@@ -38,7 +39,7 @@ export class UserBookFlightComponent implements OnInit {
   public returnDate: Date = new Date();
 
   constructor(
-    private userService: UserService,
+    private scheduleService: ScheduleServiceService,
     private dialog: MatDialog,
     private logService: LoginServiceService
   ) {
@@ -76,8 +77,8 @@ export class UserBookFlightComponent implements OnInit {
       ToLocation: this.toLocation,
       ScheduleDate: this.onwardDate.toISOString(),
     };
-    this.userService
-      .getScheduleList(searchModel)
+    this.scheduleService
+      .getSchedules(searchModel)
       .subscribe((data: [scheduleModel]) => {
         this.ownwardJourneyList = data;
       });
@@ -89,8 +90,8 @@ export class UserBookFlightComponent implements OnInit {
       ToLocation: this.fromLocation,
       ScheduleDate: this.returnDate.toISOString(),
     };
-    this.userService
-      .getScheduleList(searchModel)
+    this.scheduleService
+      .getSchedules(searchModel)
       .subscribe((data: [scheduleModel]) => {
         this.returnJourneyList = data;
       });
@@ -158,7 +159,6 @@ export class UserBookFlightComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe((result) => {
-        console.log('The dialog was closed');
         let data = result;
       });
     } else {

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/services/admin.service';
+import { AirlineServiceService } from 'src/app/services/airline-service.service';
+import { ScheduleServiceService } from 'src/app/services/schedule-service.service';
 
 @Component({
   selector: 'app-manage-schedules',
@@ -13,17 +15,18 @@ export class ManageSchedulesComponent implements OnInit {
     airlineName:'',
     flightNo:''
   }
-  constructor(private adminServices: AdminService) {
-    adminServices.getAirlines().subscribe((result) => {
+  constructor(private airlineService: AirlineServiceService,
+    private scheduleService:ScheduleServiceService) {
+    airlineService.getAirlines().subscribe((result) => {
       this.airlineList = result;
     });
-    adminServices.getSchedules().subscribe((result) => {
+    scheduleService.getSchedules().subscribe((result) => {
       this.scheduleList = result;
     });
   }
 
   onSearch(){    
-    this.adminServices.getSchedules(this.searchModel).subscribe((result) => {
+    this.scheduleService.getSchedules(this.searchModel).subscribe((result) => {
       this.scheduleList = result;
     });
   }

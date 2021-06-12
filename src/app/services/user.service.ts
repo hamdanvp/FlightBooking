@@ -19,15 +19,4 @@ export class UserService {
       { bookingDate: '05/20/2021', LogoUrl: '', price: 3500, seats: 4 },
     ];
   }
-
-  getScheduleList(searchModel: any): Observable<[scheduleModel]> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json; charset=utf-8',
-    });
-    headers.append('Access-Control-Allow-Origin', '*');
-    return this.http.get<[scheduleModel]>('https://localhost:44318/api/Schedule', {
-      headers: headers,
-      params: searchModel,
-    });
-  }
 }
