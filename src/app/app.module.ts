@@ -28,6 +28,7 @@ import { AddAirlineComponent } from './components/add-airline/add-airline.compon
 import { LoginComponent } from './components/login/login.component';
 import { from } from 'rxjs';
 import { AddSchedulesComponent } from './components/add-schedules/add-schedules.component';
+import { AddDiscountComponent } from './components/add-discount/add-discount.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AddSchedulesComponent } from './components/add-schedules/add-schedules.
     AddAirlineComponent,
     LoginComponent,
     AddSchedulesComponent,
+    AddDiscountComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,7 @@ import { AddAirlineComponent } from './components/add-airline/add-airline.compon
 import { AddSchedulesComponent } from './components/add-schedules/add-schedules.component';
 import { LoginComponent } from './components/login/login.component'
 import { MenuComponent } from './components/menu/menu.component'
+import { AddDiscountComponent } from './components/add-discount/add-discount.component';
 
 const routes: Routes = [
   {path:'',  component:UserBookFlightComponent},
@@ -25,7 +26,8 @@ const routes: Routes = [
   {path:'addAirline',  component:AddAirlineComponent},
   {path:'addSchedule',  component:AddSchedulesComponent},
   {path:'menu',  component:MenuComponent},
-  {path:'login',  component:LoginComponent}
+  {path:'login',  component:LoginComponent},
+  {path:'addDiscount',component:AddDiscountComponent}
 ];
 
 @NgModule({

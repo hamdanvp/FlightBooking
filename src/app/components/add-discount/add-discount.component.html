@@ -1,0 +1,48 @@
+<div class="subHeading">
+    Add Discount
+</div>
+<div class="contents">
+    <form  #addDiscountForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="">Coupon Code</label>
+            <input
+              type="text"
+              id="couponcode"
+              name="couponcode"
+              class="form-control"
+              [(ngModel)]="model.couponCode"
+            />
+          </div>
+          <div class="form-group">
+            <label for="">Start Date</label>
+            <input
+              type="date"
+              id="startDate"
+              name="startDate"
+              class="form-control"
+              [(ngModel)]="model.startDate"
+            />
+            <div class="form-group">
+              <label for="">End Date</label>
+              <input
+                type="date"
+                id="endDate"
+                name="endDate"
+                class="form-control"
+                [(ngModel)]="model.endDate"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Discount Amount</label>
+            <input
+              type="number"
+              id="discountAmount"
+              name="discountAmount"
+              class="form-control"
+              [(ngModel)]="model.discountAmount"
+            />
+          </div>
+          <input type="submit" value="Add" class="btn btn-primary" />
+    </form>
+</div>
