@@ -31,6 +31,7 @@ import { from } from 'rxjs';
 import { AddSchedulesComponent } from './components/add-schedules/add-schedules.component';
 import { AddDiscountComponent } from './components/add-discount/add-discount.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { AddPassengersComponent } from './components/add-passengers/add-passengers.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     AddSchedulesComponent,
     AddDiscountComponent,
     SignUpComponent,
+    AddPassengersComponent,
   ],
   imports: [
     BrowserModule,

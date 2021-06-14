@@ -10,12 +10,17 @@ import { ScheduleServiceService } from 'src/app/services/schedule-service.servic
 export class ManageSchedulesComponent implements OnInit {
   public scheduleList: any[] = [];
   public airlineList: any[] = [];
+  public instrumentList: any[] = [];
+  public locationList: any[] = [];
   searchModel={
     airlineName:'',
-    flightNo:''
+    flightNo:'',
+    instrumentUsed:''
   }
   constructor(private airlineService: AirlineServiceService,
     private scheduleService:ScheduleServiceService) {
+      this.instrumentList=airlineService.getInstrument();
+      this.locationList=airlineService.getLocation();
     airlineService.getAirlines().subscribe((result) => {
       this.airlineList = result;
     });

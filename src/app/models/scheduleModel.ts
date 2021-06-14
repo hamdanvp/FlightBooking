@@ -5,8 +5,10 @@ export class scheduleModel{
     flightNo:string="";
     from:string="";
     to:string="";
-    price:number=0;
+    nonBusinessClassPrice:number=0;
+    businessClassPrice:number=0;
     totalSeats:number=0;
-    sheduleDate:Date=new Date();
+    arrivalDate:Date=new Date();
+    departureDate:Date=new Date();
     airline:AirlineModel=new AirlineModel();
 }

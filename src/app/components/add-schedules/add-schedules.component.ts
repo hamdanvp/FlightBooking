@@ -12,12 +12,14 @@ import { ScheduleServiceService } from 'src/app/services/schedule-service.servic
 export class AddSchedulesComponent implements OnInit {
   model: scheduleModel = new scheduleModel();
   public airlineList: any[] = [];
+  public locationList: any[] = [];
 
   constructor(
     private router: Router,
     private scheduleService:ScheduleServiceService,
     private airlineServices: AirlineServiceService
   ) { 
+    this.locationList=airlineServices.getLocation();
     airlineServices.getAirlines().subscribe((result) => {
       this.airlineList = result;
     });

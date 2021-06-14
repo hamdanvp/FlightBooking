@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AirlineModel } from '../models/airlineModel';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AirlineServiceService {
   constructor(private http: HttpClient) {}
@@ -22,14 +22,36 @@ export class AirlineServiceService {
     );
   }
 
-  addAirlines(body:any): Observable<[any]> {
+  addAirlines(body: any): Observable<[any]> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Access-Control-Allow-Origin': '*'
-      })
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      }),
     };
-    const params=JSON.stringify(body);
-    return this.http.post<any>('https://localhost:44318/api/Airline', params, httpOptions);
+    const params = JSON.stringify(body);
+    return this.http.post<any>(
+      'https://localhost:44318/api/Airline',
+      params,
+      httpOptions
+    );
+  }
+
+  getLocation() {
+    return [
+      { locationName: 'Bangalore' },
+      { locationName: 'Delhi' },
+      { locationName: 'Chennai' },
+      { locationName: 'Mumbai' },
+    ];
+  }
+  getInstrument() {
+    return [
+      { instrumentName: 'A320' },
+      { instrumentName: 'A320 neo' },
+      { instrumentName: 'Boeing 737' },
+      { instrumentName: 'Boeing 717' },
+      { instrumentName: 'Boeing 757' },
+    ];
   }
 }

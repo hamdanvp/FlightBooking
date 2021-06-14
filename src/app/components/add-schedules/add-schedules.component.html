@@ -1,75 +1,109 @@
-<div class="subHeading">
-    Add Schedule
-</div>
+<div class="subHeading">Add Schedule</div>
 <div class="contents">
-    <form  #addAirlineForm="ngForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="">Flight No</label>
-            <input
-              type="text"
-              id="flightNo"
-              name="flightNo"
-              class="form-control"
-              [(ngModel)]="model.flightNo"
-            />
-          </div>
-          <div class="form-group">
-            <label for="">From</label>
-            <input
-              type="text"
-              id="from"
-              name="from"
-              class="form-control"
-              [(ngModel)]="model.from"
-            />
-            <div class="form-group">
-              <label for="">To</label>
-              <input
-                type="text"
-                id="to"
-                name="to"
-                class="form-control"
-                [(ngModel)]="model.to"
-              />
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="">Price</label>
-            <input
-              type="number"
-              id="price"
-              name="price"
-              class="form-control"
-              [(ngModel)]="model.price"
-            />
-          </div>
-          <div class="form-group">
-            <label for="">Seats</label>
-            <input
-              type="number"
-              id="totalSeats"
-              name="totalSeats"
-              class="form-control"
-              [(ngModel)]="model.totalSeats"
-            />
-          </div>
-          <div class="form-group">
-            <label for="">Schedule Date</label>
-            <input
-              type="date"
-              id="sheduleDate"
-              name="sheduleDate"
-              class="form-control"
-              [(ngModel)]="model.sheduleDate"
-            />
-          </div>
-          <div class="form-group">
-              <label>Select Airline</label>
-              <select name="airline" [(ngModel)]="model.airline.id">
-                  <option value=""></option>
-                <option *ngFor="let airline of airlineList" value="{{airline.id}}">{{airline.airlineName}}</option>
-              </select>          
-          </div>
-          <input type="submit" value="Add" class="btn btn-primary" />
-    </form>
+  <form #addAirlineForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="">Flight No</label>
+      <input
+        type="text"
+        id="flightNo"
+        name="flightNo"
+        #flightNo="ngModel"
+        class="form-control"
+        [(ngModel)]="model.flightNo"
+        [class.is-invalid]="flightNo.invalid && flightNo.touched"
+        required
+      />
+      <small
+        class="text-danger"
+        [class.d-none]="flightNo.valid || flightNo.untouched"
+        >This is require field</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="">From</label>
+      <select name="from" [(ngModel)]="model.from" class="form-control">
+        <option value=""></option>
+        <option
+          *ngFor="let location of locationList"
+          value="{{ location.locationName }}"
+        >
+          {{ location.locationName }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="">To</label>
+      <select name="to" [(ngModel)]="model.to" class="form-control">
+        <option value=""></option>
+        <option
+          *ngFor="let location of locationList"
+          value="{{ location.locationName }}"
+        >
+          {{ location.locationName }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="">BusinessClass Price</label>
+      <input
+        type="number"
+        id="businessClassPrice"
+        name="businessClassPrice"
+        class="form-control"
+        [(ngModel)]="model.businessClassPrice"
+      />
+    </div>
+    <div class="form-group">
+      <label for="">Non-BusinessClass Price</label>
+      <input
+        type="number"
+        id="nonBusinessClassPrice"
+        name="nonBusinessClassPrice"
+        class="form-control"
+        [(ngModel)]="model.nonBusinessClassPrice"
+      />
+    </div>
+    <div class="form-group">
+      <label for="">Seats</label>
+      <input
+        type="number"
+        id="totalSeats"
+        name="totalSeats"
+        class="form-control"
+        [(ngModel)]="model.totalSeats"
+      />
+    </div>
+    <div class="form-group">
+      <label for="">Departure Date</label>
+      <input
+        type="datetime-local"
+        id="departureDate"
+        name="departureDate"
+        class="form-control"
+        [ngModel]="model.departureDate | date: 'yyyy-MM-dd hh:mm'"
+        (ngModelChange)="model.departureDate = $event"
+      />
+    </div>
+    <div class="form-group">
+      <label for="">Arrival Date</label>
+      <input
+        type="datetime-local"
+        id="arrivalDate"
+        name="arrivalDate"
+        class="form-control"
+        [ngModel]="model.arrivalDate | date: 'yyyy-MM-dd hh:mm'"
+        (ngModelChange)="model.arrivalDate = $event"
+      />
+    </div>
+    <div class="form-group">
+      <label>Select Airline</label>
+      <select name="airline" [(ngModel)]="model.airline.id" class="form-control">
+        <option value=""></option>
+        <option *ngFor="let airline of airlineList" value="{{ airline.id }}">
+          {{ airline.airlineName }}
+        </option>
+      </select>
+    </div>
+    <input type="submit" value="Add" class="btn btn-primary" />
+  </form>
 </div>

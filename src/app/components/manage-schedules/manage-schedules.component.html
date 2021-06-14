@@ -21,7 +21,15 @@
     </div>
     <div class="">
       <label for="">Instrument Used</label>
-      <input type="text" name="instrumentUsed">         
+      <select name="instrumentUsed" [(ngModel)]="searchModel.instrumentUsed" class="">
+        <option value=""></option>
+        <option
+          *ngFor="let instrument of instrumentList"
+          value="{{ instrument.instrumentName }}"
+        >
+          {{ instrument.instrumentName }}
+        </option>  
+      </select>       
   </div>
   <div>
       <button class="btn" (click)="onSearch()">Search</button>

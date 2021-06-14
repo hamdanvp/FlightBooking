@@ -10,11 +10,14 @@ import { AirlineServiceService } from 'src/app/services/airline-service.service'
 })
 export class AddAirlineComponent implements OnInit {
   model: AirlineModel = new AirlineModel();
+  public instrumentList: any[] = [];
 
   constructor(
     private router: Router,
     private airlineService: AirlineServiceService
-  ) {}
+  ) {
+    this.instrumentList=airlineService.getInstrument();
+  }
 
   ngOnInit(): void {}
 
