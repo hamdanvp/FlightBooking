@@ -39,6 +39,33 @@
       </table>
   </div>
   <div>
+    <div class="" style="text-align: left">
+      <label for="">Orginal Price:</label>
+      <input
+        type="number"
+        name="orginalAmount"
+        #orginalAmount="ngModel"
+        [(ngModel)]="orginalAmount"
+      />
+    </div><div class="" style="text-align: left">
+      <label for="">Discount:</label>
+      <input
+        type="number"
+        name="discountAmount"
+        #discountAmount="ngModel"
+        [(ngModel)]="discountAmount"
+      />
+    </div><div class="" style="text-align: left">
+      <label for="">Total Amount:</label>
+      <input
+        type="text"
+        name="totalAmount"
+        #totalAmount="ngModel"
+        [(ngModel)]="totalAmount"
+      />
+    </div>
+  </div>
+  <div>
       <button class="btn" (click)="onSubmit()">Check Out</button>
   </div>
 </div>

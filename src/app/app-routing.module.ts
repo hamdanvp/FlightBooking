@@ -14,6 +14,8 @@ import { LoginComponent } from './components/login/login.component'
 import { MenuComponent } from './components/menu/menu.component'
 import { AddDiscountComponent } from './components/add-discount/add-discount.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { AddPassengersComponent } from './components/add-passengers/add-passengers.component';
+import { UserDiscountApplyComponent } from './components/user-discount-apply/user-discount-apply.component';
 
 const routes: Routes = [
   {path:'',  component:UserBookFlightComponent},
@@ -29,7 +31,9 @@ const routes: Routes = [
   {path:'menu',  component:MenuComponent},
   {path:'login',  component:LoginComponent},
   {path:'signUp',  component:SignUpComponent},
-  {path:'addDiscount',component:AddDiscountComponent}
+  {path:'addPassenger', component:AddPassengersComponent},
+  {path:'addDiscount', component:AddDiscountComponent},
+  {path:'applyDiscount', component:UserDiscountApplyComponent}
 ];
 
 @NgModule({

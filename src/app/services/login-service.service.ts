@@ -3,9 +3,11 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 
 import { UserModel } from 'src/app/models/user'
+import { BookingViewmodel } from '../models/bookingViewmodel';
 
 @Injectable()
 export class LoginServiceService {
+  public booking:BookingViewmodel=new BookingViewmodel();
 private userData:any;
   constructor(
     private http:HttpClient
@@ -13,6 +15,15 @@ private userData:any;
   public getUser() {
     return this.userData;
   }
+
+  setCurrentBooking(booking:BookingViewmodel){
+    this.booking=booking;
+  }
+
+  getCurrentBooking(){
+    return this.booking;
+  }
+
   public setUser(user: UserModel): void {
     this.userData=user;
   }

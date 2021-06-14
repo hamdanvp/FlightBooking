@@ -25,25 +25,53 @@
   <div class="flex-row from-to">
     <div class="float-child">
       <label class="form-check-label">From:</label>
-      <input
+      <select
+        name="to"
+        [(ngModel)]="fromLocation"
+        class=""
+        (change)="fromLocationChange()"
+      >
+        <option value=""></option>
+        <option
+          *ngFor="let location of locationList"
+          value="{{ location.locationName }}"
+        >
+          {{ location.locationName }}
+        </option>
+      </select>
+      <!-- <input
         type="text"
         name="From"
         id=""
         [(ngModel)]="fromLocation"
         (focus)="focusFunction($event)"
         (focusout)="fromFocusOut($event)"
-      />
+      /> -->
     </div>
     <div class="float-child">
       <label class="form-check-label">To:</label>
-      <input
+      <select
+        name="to"
+        [(ngModel)]="toLocation"
+        class=""
+        (change)="toLocationChange()"
+      >
+        <option value=""></option>
+        <option
+          *ngFor="let location of locationList"
+          value="{{ location.locationName }}"
+        >
+          {{ location.locationName }}
+        </option>
+      </select>
+      <!-- <input
         type="text"
         name="To"
         id=""
         [(ngModel)]="toLocation"
         (focus)="focusFunction($event)"
         (focusout)="toFocusOut($event)"
-      />
+      /> -->
     </div>
   </div>
   <br />
@@ -69,7 +97,13 @@
           <tbody>
             <tr
               *ngFor="let ownwardJourney of ownwardJourneyList; let i = index"
-              (click)="setOnewayPrice(i, ownwardJourney.price,ownwardJourney.id)"
+              (click)="
+                setOnewayPrice(
+                  i,
+                  ownwardJourney.nonBusinessClassPrice,
+                  ownwardJourney.id
+                )
+              "
               [class.active]="i == selectedOneWayRowIndex"
             >
               <td>
@@ -81,14 +115,23 @@
                   class="img-box"
                 />
               </td>
-              <td>{{ ownwardJourney.price }}</td>
+              <td>
+                <!-- Business Class:{{ ownwardJourney.businessClassPrice }} <br /> -->
+                Economy Class:{{ ownwardJourney.nonBusinessClassPrice }}
+              </td>
             </tr>
           </tbody>
         </table>
         <div class="oneline">
           <label for="">Meal Preference</label>
-          <select name="mealPreference" class="">
-            <option>None</option>
+          <select
+            name="mealPreference"
+            class=""
+            [(ngModel)]="ownwardSchedule.mealType"
+          >
+            <option value="">None</option>
+            <option value="Veg">Veg</option>
+            <option value="Non-Veg">Non-Veg</option>
           </select>
         </div>
       </div>
@@ -118,19 +161,24 @@
           <tbody>
             <tr
               *ngFor="let schedule of returnJourneyList; let i = index"
-              (click)="setReturnPrice(i, schedule.price,schedule.id)"
+              (click)="
+                setReturnPrice(i, schedule.nonBusinessClassPrice, schedule.id)
+              "
               [class.active]="i == selectedReturnRowIndex"
             >
-            <td>
-              <label>{{ schedule.airline?.airlineName }}</label
-              ><br />
-              <img
-                src="{{ schedule.airline?.logoUrl }}"
-                alt="Logo"
-                class="img-box"
-              />
-            </td>
-            <td>{{ schedule.price }}</td>
+              <td>
+                <label>{{ schedule.airline?.airlineName }}</label
+                ><br />
+                <img
+                  src="{{ schedule.airline?.logoUrl }}"
+                  alt="Logo"
+                  class="img-box"
+                />
+              </td>
+              <td>
+                <!-- Business Class:{{ schedule.businessClassPrice }} <br /> -->
+                Economy Class:{{ schedule.nonBusinessClassPrice }}
+              </td>
             </tr>
           </tbody>
         </table>
@@ -138,8 +186,14 @@
       <div>
         <div class="oneline">
           <label for="">Meal Preference</label>
-          <select name="mealPreference" class="">
+          <select
+            name="mealPreference"
+            class=""
+            [(ngModel)]="returnSchedule.mealType"
+          >
             <option>None</option>
+            <option>Veg</option>
+            <option>Non-Veg</option>
           </select>
         </div>
       </div>
