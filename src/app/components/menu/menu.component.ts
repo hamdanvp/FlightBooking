@@ -32,12 +32,18 @@ export class MenuComponent implements OnInit {
       this.userData=null;
       this.loginService.logOut();
       this.isLogin=false;
-      this.logButtonName="Log Out";
+      this.logButtonName="Log in";
+      this.router.navigate(['/']);
     }
     else{
       this.openDialog();
     }
   }
+
+  onSignUpClick(){
+    this.router.navigate(['/signUp']);
+  }
+  
   openDialog(): void {
     const dialogRef = this.dialog.open(LoginComponent, {
       width: '550px'

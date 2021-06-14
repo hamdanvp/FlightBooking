@@ -13,6 +13,7 @@ import { AddSchedulesComponent } from './components/add-schedules/add-schedules.
 import { LoginComponent } from './components/login/login.component'
 import { MenuComponent } from './components/menu/menu.component'
 import { AddDiscountComponent } from './components/add-discount/add-discount.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 const routes: Routes = [
   {path:'',  component:UserBookFlightComponent},
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path:'addSchedule',  component:AddSchedulesComponent},
   {path:'menu',  component:MenuComponent},
   {path:'login',  component:LoginComponent},
+  {path:'signUp',  component:SignUpComponent},
   {path:'addDiscount',component:AddDiscountComponent}
 ];
 

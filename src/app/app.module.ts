@@ -30,6 +30,7 @@ import { LoginComponent } from './components/login/login.component';
 import { from } from 'rxjs';
 import { AddSchedulesComponent } from './components/add-schedules/add-schedules.component';
 import { AddDiscountComponent } from './components/add-discount/add-discount.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { AddDiscountComponent } from './components/add-discount/add-discount.com
     LoginComponent,
     AddSchedulesComponent,
     AddDiscountComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,

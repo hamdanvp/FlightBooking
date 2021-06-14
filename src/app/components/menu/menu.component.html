@@ -1,4 +1,5 @@
 <div style="width: 100%; text-align: right">
+  <button *ngIf="!isLogin" class="btn btn-primary" (click)="onSignUpClick()">Sign up</button>
   <button class="btn btn-secondary" (click)="onLogClick()">{{logButtonName}}</button>
 </div>
 <div class="menu-bar" style="width: 100%">
