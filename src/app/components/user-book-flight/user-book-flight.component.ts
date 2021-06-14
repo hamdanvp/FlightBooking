@@ -6,7 +6,6 @@ import {
 } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 
-import { UserService } from 'src/app/services/user.service';
 import { UserDiscountApplyComponent } from '../user-discount-apply/user-discount-apply.component';
 import { scheduleModel } from 'src/app/models/scheduleModel';
 import { LoginServiceService } from 'src/app/services/login-service.service';

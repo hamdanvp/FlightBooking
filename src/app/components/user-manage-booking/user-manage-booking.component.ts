@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookingServiceService } from 'src/app/services/booking-service.service';
 import { LoginServiceService } from 'src/app/services/login-service.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-manage-booking',
