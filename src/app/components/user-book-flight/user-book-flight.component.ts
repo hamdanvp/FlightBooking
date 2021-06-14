@@ -12,6 +12,7 @@ import { scheduleModel } from 'src/app/models/scheduleModel';
 import { LoginServiceService } from 'src/app/services/login-service.service';
 import { UserModel } from 'src/app/models/user';
 import { ScheduleServiceService } from 'src/app/services/schedule-service.service';
+import { BookingViewmodel } from 'src/app/models/bookingViewmodel';
 
 @Component({
   selector: 'app-user-book-flight',
@@ -37,6 +38,7 @@ export class UserBookFlightComponent implements OnInit {
   returnScheduleId: string = '';
   public onwardDate: Date = new Date();
   public returnDate: Date = new Date();
+  booking:BookingViewmodel=new BookingViewmodel();
 
   constructor(
     private scheduleService: ScheduleServiceService,
@@ -48,11 +50,11 @@ export class UserBookFlightComponent implements OnInit {
       if (this.selectedReturnRowIndex == index) {
         this.selectedReturnRowIndex = -1;
         this.returnPrice = 0;
-        this.ownwardScheduleId='';
+        this.returnScheduleId='';
       } else {
         this.selectedReturnRowIndex = index;
         this.returnPrice = returnPrice;
-        this.ownwardScheduleId=scheduleId;
+        this.returnScheduleId=scheduleId;
       }
       this.calculateTotal();
     };
@@ -61,11 +63,11 @@ export class UserBookFlightComponent implements OnInit {
       if (this.selectedOneWayRowIndex == index) {
         this.selectedOneWayRowIndex = -1;
         this.oneWayPrice = 0;
-        this.returnScheduleId='';
+        this.ownwardScheduleId='';
       } else {
         this.selectedOneWayRowIndex = index;
         this.oneWayPrice = price;
-        this.returnScheduleId=scheduleId;
+        this.ownwardScheduleId=scheduleId;
       }
       this.calculateTotal();
     };
@@ -137,24 +139,31 @@ export class UserBookFlightComponent implements OnInit {
   }
 
   public openDiscountDialog(): void {
+    this.booking.scheduleIds.length=0;
     if(this.ownwardScheduleId.trim()==''){
       alert("Please select ownward journey");
       return;
+    }
+    else{
+      this.booking.scheduleIds.push(this.ownwardScheduleId);
     }
     if(this.returnScheduleId.trim()=='' && this.tripType=='roundTrip'){
       alert('Please select return journey');
       return;
     }
+    else if(this.returnScheduleId.trim()!='' && this.tripType=='roundTrip'){
+      this.booking.scheduleIds.push(this.returnScheduleId);
+    }
 
     
     let userData: any=this.logService.getUser();
     if (userData != null) {
+      this.booking.userId=userData.id;
       let dialogRef = this.dialog.open(UserDiscountApplyComponent, {
         width: '500px',
         data: {
           triptype:this.tripType,
-          ownwardJourney:this.ownwardScheduleId,
-          returnJourney:this.returnScheduleId
+          booking: this.booking
         },
       });
 

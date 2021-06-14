@@ -11,9 +11,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let booking of bookingHistory">
-            <td>{{ booking.LogoUrl }}</td>
-            <td>{{ booking.price | currency: "RS":"code" }}</td>
-          <td>{{ booking.bookingDate }}</td>
+            <td>
+              <img src="{{booking.airlineSchedule?.airline?.logoUrl}}" alt="Logo" class="img-box" />
+              {{ booking.airlineSchedule?.airline?.airlineName }}</td>
+            <td>{{ booking.airlineSchedule?.price | currency: "RS":"code" }}</td>
+          <td>{{ booking.airlineSchedule?.sheduleDate | date: "dd/MM/yyy"  }}</td>
           <td>
             <button class="btn">View</button>
             <button class="btn">Download</button>

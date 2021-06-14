@@ -6,10 +6,10 @@
             <label for="">Discounte Code</label>
           </td>
           <td>
-            <input type="text" name="discountCode" id="" />
+            <input type="text" name="discountCode" id="" [(ngModel)]="discountCode" />
           </td>
           <td>
-            <button class="btn">Apply</button>
+            <button class="btn" (click)="applyDiscount()" >Apply</button>
           </td>
         </tr>
         <tr>
@@ -18,16 +18,20 @@
           <td>
             <select name="bookingOwnwardSeat" class="">
               <option>None</option>
+              <option>Business Class</option>
+              <option>Economic Class</option>
             </select>
           </td>
           <td></td>
         </tr>
-        <tr>
+        <tr *ngIf='isRoundTrip'>
           <td>
               <label for="">Select Seat (Return Journey)</label></td>
           <td>
-            <select name="bookingReturnSeat" class="">
+            <select name="bookingReturnSeat" class="">              
               <option>None</option>
+              <option>Business Class</option>
+              <option>Economic Class</option>
             </select>
           </td>
           <td></td>
@@ -35,6 +39,6 @@
       </table>
   </div>
   <div>
-      <button class="btn" (click)="submit()">Check Out</button>
+      <button class="btn" (click)="onSubmit()">Check Out</button>
   </div>
 </div>
