@@ -29,6 +29,7 @@
           <button
             class="btn"
             *ngIf="canCancel(booking.airlineSchedule?.departureDate)"
+            (click)="cancelBookingById(booking.id)"
           >
             Cancel
           </button>

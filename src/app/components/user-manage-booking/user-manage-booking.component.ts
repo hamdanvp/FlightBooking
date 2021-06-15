@@ -12,6 +12,7 @@ export class UserManageBookingComponent implements OnInit {
   public currentUser: any;
   searchModel = {
     UserId: '',
+    isCancelled: false,
     startDate: new Date().toISOString(),
   };
 
@@ -19,21 +20,31 @@ export class UserManageBookingComponent implements OnInit {
     private bookingService: BookingServiceService,
     private logService: LoginServiceService
   ) {
+    this.getBookingList();
+  }
+
+  getBookingList() {
     this.currentUser = this.logService.getUser();
     if (this.currentUser != null) {
       this.searchModel.UserId = this.currentUser.id;
-      bookingService.getBookings(this.searchModel).subscribe((result) => {
+      this.bookingService.getBookings(this.searchModel).subscribe((result) => {
         this.bookingHistory = result;
       });
     }
   }
 
   canCancel(departureDate: string) {
-    let diff = new Date().getTime() - (new Date(departureDate)).getTime();
+    let diff = new Date().getTime() - new Date(departureDate).getTime();
     let days = Math.floor(diff / (60 * 60 * 24 * 1000));
     let hours = Math.floor(diff / (60 * 60 * 1000)) - days * 24;
     if (hours > 24) return true;
-    else return false;
+    else return true;
+  }
+
+  cancelBookingById(bookingId: string) {
+    this.bookingService.cancelByBookingId(bookingId).subscribe((result) => {
+      this.getBookingList();
+    });
   }
 
   ngOnInit(): void {}

@@ -16,6 +16,7 @@ import { AddDiscountComponent } from './components/add-discount/add-discount.com
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AddPassengersComponent } from './components/add-passengers/add-passengers.component';
 import { UserDiscountApplyComponent } from './components/user-discount-apply/user-discount-apply.component';
+import { ViewBookingDetailsComponent } from './components/view-booking-details/view-booking-details.component';
 
 const routes: Routes = [
   {path:'',  component:UserBookFlightComponent},
@@ -33,7 +34,8 @@ const routes: Routes = [
   {path:'signUp',  component:SignUpComponent},
   {path:'addPassenger', component:AddPassengersComponent},
   {path:'addDiscount', component:AddDiscountComponent},
-  {path:'applyDiscount', component:UserDiscountApplyComponent}
+  {path:'applyDiscount', component:UserDiscountApplyComponent},
+  {path:'bookingView/:id', component:ViewBookingDetailsComponent}
 ];
 
 @NgModule({
