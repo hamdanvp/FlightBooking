@@ -24,19 +24,19 @@ export class UserDiscountApplyComponent implements OnInit {
     private bookingService: BookingServiceService,
     private discountService: DiscountServicesService,
     private loginService: LoginServiceService,
-    private router:Router
+    private router: Router
   ) {
     this.booking = loginService.getCurrentBooking();
-    if(this.booking.userId.trim()==''){
+    if (this.booking.userId.trim() == '') {
       router.navigate(['/']);
     }
-      this.ownwardSchedule=this.booking.schedules[1];
-      if(this.booking.schedules.length==2){
-      this.isRoundTrip=true;
-      this.returnSchedule=this.booking.schedules[2];
+    this.ownwardSchedule = this.booking.schedules[0];
+    if (this.booking.schedules.length == 2) {
+      this.isRoundTrip = true;
+      this.returnSchedule = this.booking.schedules[1];
     }
     for (let i = 0; i < this.booking.schedules.length; i++) {
-      this.orginalAmount=this.booking.schedules[i].bookingPrice;
+      this.orginalAmount = this.booking.schedules[i].bookingPrice;
     }
     this.calculateTotal();
   }
@@ -56,19 +56,19 @@ export class UserDiscountApplyComponent implements OnInit {
   }
 
   onSubmit() {
-    this.booking.schedules.length=0;
+    this.booking.schedules.length = 0;
     this.booking.schedules.push(this.ownwardSchedule);
-    this.booking.schedules.push(this.returnSchedule);
+    if (this.isRoundTrip) this.booking.schedules.push(this.returnSchedule);
     this.bookingService.addBooking(this.booking).subscribe((result) => {
       alert('Booking added succesfully');
-      this.loginService.setCurrentBooking(new BookingViewmodel);
+      this.loginService.setCurrentBooking(new BookingViewmodel());
       this.router.navigate(['/']);
     });
   }
 
-  calculateTotal(){
-    this.totalAmount=this.orginalAmount-this.discountAmount;
+  calculateTotal() {
+    this.totalAmount = this.orginalAmount - this.discountAmount;
   }
 
-  onReturnSeatChange(){}
+  onReturnSeatChange() {}
 }

@@ -15,6 +15,7 @@ export class ManageSchedulesComponent implements OnInit {
   searchModel={
     airlineName:'',
     flightNo:'',
+    isAdmin:true,
     instrumentUsed:''
   }
   constructor(private airlineService: AirlineServiceService,
@@ -24,7 +25,7 @@ export class ManageSchedulesComponent implements OnInit {
     airlineService.getAirlines().subscribe((result) => {
       this.airlineList = result;
     });
-    scheduleService.getSchedules().subscribe((result) => {
+    scheduleService.getSchedules(this.searchModel).subscribe((result) => {
       this.scheduleList = result;
     });
   }
