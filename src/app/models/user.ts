@@ -1,5 +1,5 @@
 export class UserModel{
-     id:string="";
+     id:string="3fa85f64-5717-4562-b3fc-2c963f66afa6";
      firstName:string="";
      lastName:string="";
      password:string="";
@@ -7,9 +7,5 @@ export class UserModel{
      isAdmin:boolean=false;
      getFullName() {
         return this.firstName + ' ' + this.lastName;
-      }
-      deserialize(input: any) {
-        Object.assign(this, input);
-        return this;
       }
 }

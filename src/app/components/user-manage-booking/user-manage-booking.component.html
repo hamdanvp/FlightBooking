@@ -1,28 +1,39 @@
 <div class="subHeading">
-    <h3>Manage Bookings</h3>
-  </div>
-  <div class="contents">
-    <table class="table table-striped">
-      <thead>
-        <th>Airline</th>
-        <th>Price</th>
-        <th>Booking Date</th>
-        <th></th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let booking of bookingHistory">
-            <td>
-              <img src="{{booking.airlineSchedule?.airline?.logoUrl}}" alt="Logo" class="img-box" />
-              {{ booking.airlineSchedule?.airline?.airlineName }}</td>
-            <td>{{ booking.airlineSchedule?.price | currency: "RS":"code" }}</td>
-          <td>{{ booking.airlineSchedule?.sheduleDate | date: "dd/MM/yyy"  }}</td>
-          <td>
-            <button class="btn">View</button>
-            <button class="btn">Download</button>
-            <button class="btn">Cancel</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+  <h3>Manage Bookings</h3>
+</div>
+<div class="contents">
+  <table class="table table-striped">
+    <thead>
+      <th>Airline</th>
+      <th>Price</th>
+      <th>Departure Date</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let booking of bookingHistory">
+        <td>
+          <img
+            src="{{ booking.airlineSchedule?.airline?.logoUrl }}"
+            alt="Logo"
+            class="img-box"
+          />
+          {{ booking.airlineSchedule?.airline?.airlineName }}
+        </td>
+        <td>{{ booking.bookingAmount | currency: "₹ ":"code" }}</td>
+        <td>
+          {{ booking.airlineSchedule?.departureDate | date: "dd/MM/yyy hh:mm" }}
+        </td>
+        <td>
+          <button class="btn">View</button>
+          <button class="btn">Download</button>
+          <button
+            class="btn"
+            *ngIf="canCancel(booking.airlineSchedule?.departureDate)"
+          >
+            Cancel
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

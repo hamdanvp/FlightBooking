@@ -32,6 +32,7 @@ import { AddSchedulesComponent } from './components/add-schedules/add-schedules.
 import { AddDiscountComponent } from './components/add-discount/add-discount.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AddPassengersComponent } from './components/add-passengers/add-passengers.component';
+import { ViewBookingDetailsComponent } from './components/view-booking-details/view-booking-details.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { AddPassengersComponent } from './components/add-passengers/add-passenge
     AddDiscountComponent,
     SignUpComponent,
     AddPassengersComponent,
+    ViewBookingDetailsComponent,
   ],
   imports: [
     BrowserModule,

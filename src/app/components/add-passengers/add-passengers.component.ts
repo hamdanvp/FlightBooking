@@ -33,7 +33,7 @@ passenger:PassengerModel=new PassengerModel();
   }
 
   onSubmit(){
-    if(this.passengerList.length=0){
+    if(this.passengerList.length==0){
       alert('Add passengers pls');
       return;
     }
