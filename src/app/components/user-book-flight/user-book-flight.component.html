@@ -32,21 +32,10 @@
         (change)="fromLocationChange()"
       >
         <option value=""></option>
-        <option
-          *ngFor="let location of locationList"
-          value="{{ location.locationName }}"
-        >
-          {{ location.locationName }}
-        </option>
+        <ng-container *ngFor="let location of locationList">
+          <option *ngIf="location.locationName!=toLocation"  [ngValue]="location.locationName" >{{location.locationName}}</option>
+        </ng-container>
       </select>
-      <!-- <input
-        type="text"
-        name="From"
-        id=""
-        [(ngModel)]="fromLocation"
-        (focus)="focusFunction($event)"
-        (focusout)="fromFocusOut($event)"
-      /> -->
     </div>
     <div class="float-child">
       <label class="form-check-label">To:</label>
@@ -57,21 +46,10 @@
         (change)="toLocationChange()"
       >
         <option value=""></option>
-        <option
-          *ngFor="let location of locationList"
-          value="{{ location.locationName }}"
-        >
-          {{ location.locationName }}
-        </option>
-      </select>
-      <!-- <input
-        type="text"
-        name="To"
-        id=""
-        [(ngModel)]="toLocation"
-        (focus)="focusFunction($event)"
-        (focusout)="toFocusOut($event)"
-      /> -->
+        <ng-container *ngFor="let location of locationList">
+          <option *ngIf="location.locationName!=fromLocation"  [ngValue]="location.locationName" >{{location.locationName}}</option>
+        </ng-container>
+      </select>      
     </div>
   </div>
   <br />

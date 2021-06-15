@@ -1,67 +1,77 @@
-<div class="contents">  
+<div class="contents">
   <div>
-    <table class="table">
-        <tr>
-          <td>
-            <label for="">Discounte Code</label>
-          </td>
-          <td>
-            <input type="text" name="discountCode" id="" [(ngModel)]="discountCode" />
-          </td>
-          <td>
-            <button class="btn" (click)="applyDiscount()" >Apply</button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-              <!-- <label for="">Select Seat (Ownward Journey)</label></td> -->
-          <td>
-            <!-- <select name="bookingOwnwardSeat" class="" [(ngModel)]="ownwardSchedule.classType">              
-              <option value="Non-Business">Business Class</option>
-              <option value="Business">Economic Class</option>
-            </select> -->
-          </td>
-          <td></td>
-        </tr>
-        <tr *ngIf='isRoundTrip'>
-          <td>
-              <!-- <label for="">Select Seat (Return Journey)</label></td> -->
-          <td>
-            <!-- <select name="bookingReturnSeat" class="" (change)="onReturnSeatChange()"
-            [(ngModel)]="returnSchedule.classType">  
-              <option value="Non-Business">Business Class</option>
-              <option value="Business">Economic Class</option>
-            </select> -->
-          </td>
-          <td></td>
-        </tr>
-      </table>
+    <table class="table" style="width: auto;">
+      <tr>
+        <td>
+          <label for="">Discounte Code</label>
+        </td>
+        <td>
+          <!-- <input type="text" name="discountCode" id="" [(ngModel)]="discountCode" /> -->
+          <select name="discountCode" id="discountCode" [(ngModel)]="discountCode">
+            <option value=""></option>
+            <option
+              *ngFor="let discount of discountList"
+              value="{{discount.couponCode}}"
+            >
+              {{ discount.couponCode }}
+            </option>
+          </select>
+        </td>
+        <td>
+          <button class="btn" (click)="applyDiscount()">Apply</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="">Select Seat (Ownward Journey)</label>
+        </td>
+        <td>
+          <select
+            name="bookingOwnwardSeat"
+            class=""
+            [(ngModel)]="ownwardSchedule.classType"
+            (change)="ownwardScheduleChange()"
+          >
+            <option value="Non-Business">Economic Class</option>
+            <option value="Business">Business Class</option>
+          </select>
+        </td>
+        <td></td>
+      </tr>
+      <tr *ngIf="isRoundTrip">
+        <td>
+          <label for="">Select Seat (Return Journey)</label>
+        </td>
+        <td>
+          <select
+            name="bookingReturnSeat"
+            class=""
+            [(ngModel)]="returnSchedule.classType"
+            (change)="returnScheduleChange()"
+          >
+            <option value="Non-Business">Business Class</option>
+            <option value="Business">Economic Class</option>
+          </select>
+        </td>
+        <td></td>
+      </tr>
+    </table>
   </div>
   <div>
     <div class="" style="text-align: left">
       <label for="">Orginal Price:</label>
-      <input
-        type="number"
-        name="orginalAmount"
-        [(ngModel)]="orginalAmount"
-      />
-    </div><div class="" style="text-align: left">
+      <input type="number" name="orginalAmount" [(ngModel)]="orginalAmount" />
+    </div>
+    <div class="" style="text-align: left">
       <label for="">Discount:</label>
-      <input
-        type="number"
-        name="discountAmount"
-        [(ngModel)]="discountAmount"
-      />
-    </div><div class="" style="text-align: left">
+      <input type="number" name="discountAmount" [(ngModel)]="discountAmount" />
+    </div>
+    <div class="" style="text-align: left">
       <label for="">Total Amount:</label>
-      <input
-        type="text"
-        name="totalAmount"
-        [(ngModel)]="totalAmount"
-      />
+      <input type="text" name="totalAmount" [(ngModel)]="totalAmount" />
     </div>
   </div>
   <div>
-      <button class="btn" (click)="onSubmit()">Check Out</button>
+    <button class="btn" (click)="onSubmit()">Check Out</button>
   </div>
 </div>

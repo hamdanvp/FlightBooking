@@ -1,12 +1,13 @@
 <div class="subHeading">Add Passenger Details</div>
 <div class="contents">
+  <h5>Booking details</h5>
   <form #addAirlineForm="ngForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="">Name</label>
       <input
         type="text"
-        id="name"
-        name="name"
+        id="username"
+        name="username"
         class="form-control"
         [(ngModel)]="model.name"
       />
@@ -32,60 +33,67 @@
       />
     </div>
     <div>
-        <div>
-            <h5>Passenger Details</h5>
-        </div>
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <td>Name</td>
-                        <td>Age</td>
-                        <td>Gender</td>
-                        <td></td>
-                    </tr>
-                </thead>
-                <tbody>
-                  
-                    <tr *ngFor="let passenger of passengerList">
-                      <td>{{passenger.name}}</td>
-                      <td>{{passenger.age}}</td>
-                      <td>{{passenger.gender}}</td>
-                      <td></td>                        
-                    </tr>
-                    <tr>
-                      <td>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            [(ngModel)]="passenger.name"
-                        />
-                    </td>
-                    <td>                        
-                        <input
-                            type="number"
-                            id="age"
-                            name="age"
-                            [(ngModel)]="passenger.age"
-                        />
-                    </td>
-                    <td>
-                        <select name="gender" id="gender" [(ngModel)]="passenger.gender">
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>
-                    </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div>
-          
-            <input type="button" value="Add Passenger" class="btn"  (click)="addPassengerRow()">
-            <!-- <button class="btn" (click)="addPassengerRow()">Add Passenger</button> -->
-        </div>
+      <div>
+        <h5>Passenger Details</h5>
+      </div>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <td>Name</td>
+              <td>Age</td>
+              <td>Gender</td>
+              <td></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let passenger of passengerList">
+              <td>{{ passenger.name }}</td>
+              <td>{{ passenger.age }}</td>
+              <td>{{ passenger.gender }}</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  [(ngModel)]="passenger.name"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  id="age"
+                  name="age"
+                  [(ngModel)]="passenger.age"
+                />
+              </td>
+              <td>
+                <select
+                  name="gender"
+                  id="gender"
+                  [(ngModel)]="passenger.gender"
+                >
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <input
+          type="button"
+          value="Add Passenger"
+          class="btn"
+          (click)="addPassengerRow()"
+        />
+        <!-- <button class="btn" (click)="addPassengerRow()">Add Passenger</button> -->
+      </div>
     </div>
-    <input type="submit" value="Add" class="btn btn-primary" />
+    <input type="submit" value="Submit" class="btn btn-primary" />
   </form>
 </div>

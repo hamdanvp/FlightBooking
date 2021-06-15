@@ -9,7 +9,7 @@ import { DiscountModel } from '../models/discountModel';
 export class DiscountServicesService {
   constructor(private http: HttpClient) {}
 
-  getDiscount(): Observable<[DiscountModel]> {
+  getDiscount(searchModel?:any): Observable<[DiscountModel]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',
     });
@@ -18,6 +18,7 @@ export class DiscountServicesService {
       'https://localhost:44318/api/Discount',
       {
         headers: headers,
+        params:searchModel
       }
     );
   }

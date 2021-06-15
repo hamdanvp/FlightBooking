@@ -25,6 +25,19 @@ export class ScheduleServiceService {
     );
   }
 
+  getScheduleById(id: string): Observable<scheduleModel> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=utf-8',
+    });
+    headers.append('Access-Control-Allow-Origin', '*');
+    const url = 'https://localhost:44318/api/Schedule/'+id;
+    return this.http.get<scheduleModel>(
+      url,
+      {
+        headers: headers
+      });
+  }
+
   addSchedule(body:any): Observable<[any]> {
     const httpOptions = {
       headers: new HttpHeaders({

@@ -21,6 +21,7 @@ passenger:PassengerModel=new PassengerModel();
     if(this.model.userId.trim()==''){
       router.navigate(['/']);
     }
+    this.passengerList=this.model.passengers;
    }
 
   ngOnInit(): void {

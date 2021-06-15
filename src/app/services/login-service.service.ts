@@ -13,6 +13,7 @@ private userData:any;
     private http:HttpClient
   ) { }
   public getUser() {
+    this.userData = JSON.parse(''+localStorage.getItem('currentUser'));
     return this.userData;
   }
 
@@ -26,9 +27,11 @@ private userData:any;
 
   public setUser(user: UserModel): void {
     this.userData=user;
+    localStorage.setItem('currentUser',JSON.stringify(user))
   }
   public logOut(){
     this.userData=null;
+    localStorage.removeItem('currentUser');
   }
   public Login(username:string,password:string): Observable<UserModel>{
     const headers = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8'});
