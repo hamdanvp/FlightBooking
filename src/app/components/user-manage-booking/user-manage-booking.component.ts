@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BookingServiceService } from 'src/app/services/booking-service.service';
 import { LoginServiceService } from 'src/app/services/login-service.service';
 
@@ -18,7 +19,8 @@ export class UserManageBookingComponent implements OnInit {
 
   constructor(
     private bookingService: BookingServiceService,
-    private logService: LoginServiceService
+    private logService: LoginServiceService,
+    private router: Router
   ) {
     this.getBookingList();
   }
@@ -39,6 +41,10 @@ export class UserManageBookingComponent implements OnInit {
     let hours = Math.floor(diff / (60 * 60 * 1000)) - days * 24;
     if (hours > 24) return true;
     else return true;
+  }
+
+  viewBookingDetails(bookingId:string){
+    this.router.navigate(['bookingView/'+bookingId])
   }
 
   cancelBookingById(bookingId: string) {

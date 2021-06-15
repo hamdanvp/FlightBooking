@@ -1,0 +1,75 @@
+<div class="subHeading">
+    <h3>View Booking Details</h3>
+</div>
+<div class="contents">
+    <div *ngIf="!isBookingLoading">
+        <div>
+            <div style="font-weight: bold">
+                <label>PNR:  {{bookingDetails.pnr}}</label>
+            </div>
+            <div>
+                <label>Airline:  <img
+                    src="{{ bookingDetails.airlineSchedule?.airline?.logoUrl }}"
+                    alt="Logo"
+                    class="img-box"
+                  />
+                  {{ bookingDetails.airlineSchedule?.airline?.airlineName }}
+                </label>
+            </div>
+            <div>
+                <label>Flight No:  {{bookingDetails.airlineSchedule?.flightNo }}</label>
+            </div>
+            <div>
+                <label>From:  {{bookingDetails.airlineSchedule?.from }}</label>
+            </div>
+            <div>
+                <label>Departure:  {{bookingDetails.airlineSchedule?.departureDate | date: "dd/MM/yyy hh:mm" }}</label>
+            </div>
+            <div>
+                <label>To:  {{bookingDetails.airlineSchedule?.to }}</label>
+            </div>
+            <div>
+                <label>Arrival:  {{bookingDetails.airlineSchedule?.arrivalDate | date: "dd/MM/yyy hh:mm" }}</label>
+            </div>
+            <div>
+                <label>Orginal Amount:  {{bookingDetails.orginalAmount | currency: "₹ ":"code" }}</label>
+            </div>
+            <div>
+                <label>Discount Amount:  {{bookingDetails.orginalAmount | currency: "₹ ":"code" }}</label>
+            </div>
+            <div>
+                <label>Total Amount:  {{bookingDetails.orginalAmount | currency: "₹ ":"code" }}</label>
+            </div>
+        </div>
+        <div>
+            <h5>Contact Details</h5>
+            <div>
+                <label>Name:  {{bookingDetails.name }}</label>
+            </div>
+            <div>
+                <label>Contact Number:  {{bookingDetails.contactNumber }}</label>
+            </div><div>
+                <label>Contact Address:  {{bookingDetails.contactAddress }}</label>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!isPassengerLoading">
+        <h5>Passenger Details</h5>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Age</td>
+                    <td>Gender</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let passenger of passengerList">
+                    <td>{{passenger.name}}</td>
+                    <td>{{passenger.age}}</td>
+                    <td>{{passenger.gender}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

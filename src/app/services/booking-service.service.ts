@@ -25,6 +25,17 @@ export class BookingServiceService {
     );
   }
 
+  getBookingById(bookingId: string): Observable<BookingModel> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=utf-8',
+    });
+    headers.append('Access-Control-Allow-Origin', '*');
+    const url = 'https://localhost:44318/api/Booking/' + bookingId;
+    return this.http.get<BookingModel>(url, {
+      headers: headers,
+    });
+  }
+
   getPassengersByBookingId(bookingId: string): Observable<[PassengerModel]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',
