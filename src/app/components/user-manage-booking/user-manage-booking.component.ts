@@ -11,7 +11,8 @@ export class UserManageBookingComponent implements OnInit {
   public bookingHistory:any[]=[];
   public currentUser:any;
   searchModel = {
-    UserId:''
+    UserId:'',
+    startDate: new Date().toISOString()
   };
 
   constructor(
@@ -21,7 +22,7 @@ export class UserManageBookingComponent implements OnInit {
     this.currentUser=this.logService.getUser();
     if(this.currentUser!=null){
       this.searchModel.UserId=this.currentUser.id;
-      bookingService.getBookings().subscribe((result)=>{
+      bookingService.getBookings(this.searchModel).subscribe((result)=>{
         this.bookingHistory=result;
       });
     }

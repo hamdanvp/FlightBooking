@@ -58,9 +58,9 @@
       <div class="float-child">
         <label class="form-check-label">Ownward Journey:</label>
         <input
-          type="date"
+          type="datetime-local"
           name="fromDate"
-          [ngModel]="onwardDate | date: 'yyyy-MM-dd'"
+          [ngModel]="onwardDate | date: 'YYYY-MM-ddTHH:mm:ss'"
           (ngModelChange)="onwardDateChange($event)"
         />
       </div>
@@ -95,7 +95,8 @@
               </td>
               <td>
                 <!-- Business Class:{{ ownwardJourney.businessClassPrice }} <br /> -->
-                Economy Class:{{ ownwardJourney.nonBusinessClassPrice }}
+                Economy Class:{{ ownwardJourney.nonBusinessClassPrice }}<br />
+                Departure Date: {{ ownwardJourney.departureDate | date: 'YYYY-MM-dd HH:mm:ss'}}
               </td>
             </tr>
           </tbody>
@@ -124,7 +125,7 @@
         <input
           type="date"
           name="toDate"
-          [ngModel]="returnDate | date: 'yyyy-MM-dd'"
+          [ngModel]="returnDate | date: 'YYYY-MM-ddTHH:mm:ss'"
           (ngModelChange)="returnDateChange($event)"
         />
       </div>
@@ -155,7 +156,8 @@
               </td>
               <td>
                 <!-- Business Class:{{ schedule.businessClassPrice }} <br /> -->
-                Economy Class:{{ schedule.nonBusinessClassPrice }}
+                Economy Class:{{ schedule.nonBusinessClassPrice }}<br />
+                Departure Date: {{ schedule.departureDate | date: 'YYYY-MM-dd HH:mm:ss'}}
               </td>
             </tr>
           </tbody>
