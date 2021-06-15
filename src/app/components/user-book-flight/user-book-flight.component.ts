@@ -37,7 +37,7 @@ export class UserBookFlightComponent implements OnInit {
   fromLocation: string = '';
   toLocation: string = '';
   ownwardSchedule: ScheduleViewModel = new ScheduleViewModel();
-  returnSchedule: ScheduleViewModel = new ScheduleViewModel();;
+  returnSchedule: ScheduleViewModel = new ScheduleViewModel();
   public onwardDate: Date = new Date();
   public returnDate: Date = new Date();
   booking:BookingViewmodel=new BookingViewmodel();
@@ -56,10 +56,12 @@ export class UserBookFlightComponent implements OnInit {
         this.selectedReturnRowIndex = -1;
         this.returnPrice = 0;
         this.returnSchedule.scheduleId='';
+        this.returnSchedule.bookingPrice=0;
       } else {
         this.selectedReturnRowIndex = index;
         this.returnPrice = returnPrice;
         this.returnSchedule.scheduleId=scheduleId;
+        this.returnSchedule.bookingPrice=returnPrice;
       }
       this.calculateTotal();
     };
@@ -68,11 +70,13 @@ export class UserBookFlightComponent implements OnInit {
       if (this.selectedOneWayRowIndex == index) {
         this.selectedOneWayRowIndex = -1;
         this.oneWayPrice = 0;
+        this.ownwardSchedule.bookingPrice=0;
         this.ownwardSchedule.scheduleId='';
       } else {
         this.selectedOneWayRowIndex = index;
         this.oneWayPrice = price;
         this.ownwardSchedule.scheduleId=scheduleId;
+        this.ownwardSchedule.bookingPrice=price;
       }
       this.calculateTotal();
     };

@@ -42,38 +42,48 @@
                         <td>Name</td>
                         <td>Age</td>
                         <td>Gender</td>
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
+                  
                     <tr *ngFor="let passenger of passengerList">
-                        <td>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                [(ngModel)]="passenger.name"
-                            />
-                        </td>
-                        <td>                        
-                            <input
-                                type="number"
-                                id="age"
-                                name="age"
-                                [(ngModel)]="passenger.age"
-                            />
-                        </td>
-                        <td>
-                            <select name="gender" id="gender" [(ngModel)]="passenger.gender">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
-                        </td>
+                      <td>{{passenger.name}}</td>
+                      <td>{{passenger.age}}</td>
+                      <td>{{passenger.gender}}</td>
+                      <td></td>                        
+                    </tr>
+                    <tr>
+                      <td>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            [(ngModel)]="passenger.name"
+                        />
+                    </td>
+                    <td>                        
+                        <input
+                            type="number"
+                            id="age"
+                            name="age"
+                            [(ngModel)]="passenger.age"
+                        />
+                    </td>
+                    <td>
+                        <select name="gender" id="gender" [(ngModel)]="passenger.gender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div>
-            <button class="btn" (click)="addPassengerRow()">Add Passenger</button>
+          
+            <input type="button" value="Add Passenger" class="btn"  (click)="addPassengerRow()">
+            <!-- <button class="btn" (click)="addPassengerRow()">Add Passenger</button> -->
         </div>
     </div>
     <input type="submit" value="Add" class="btn btn-primary" />

@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BookingViewmodel } from 'src/app/models/bookingViewmodel';
-import { scheduleModel } from 'src/app/models/scheduleModel';
+import { ScheduleViewModel } from 'src/app/models/scheduleViewModel';
 import { BookingServiceService } from 'src/app/services/booking-service.service';
 import { DiscountServicesService } from 'src/app/services/discount-services.service';
 import { LoginServiceService } from 'src/app/services/login-service.service';
@@ -18,6 +18,8 @@ export class UserDiscountApplyComponent implements OnInit {
   totalAmount: number = 0;
   discountAmount: number = 0;
   booking: BookingViewmodel = new BookingViewmodel();
+  ownwardSchedule: ScheduleViewModel = new ScheduleViewModel();
+  returnSchedule: ScheduleViewModel = new ScheduleViewModel();
   constructor(
     private bookingService: BookingServiceService,
     private discountService: DiscountServicesService,
@@ -25,12 +27,17 @@ export class UserDiscountApplyComponent implements OnInit {
     private router:Router
   ) {
     this.booking = loginService.getCurrentBooking();
-    if(this.booking.schedules.length==2){
-      this.isRoundTrip=true;
+    if(this.booking.userId.trim()==''){
+      router.navigate(['/']);
     }
-    // for (let i = 0; i < this.booking.schedules.length; i++) {
-    //   this.orginalAmount=this.booking.schedules[i].bookingPrice;
-    // }
+      this.ownwardSchedule=this.booking.schedules[1];
+      if(this.booking.schedules.length==2){
+      this.isRoundTrip=true;
+      this.returnSchedule=this.booking.schedules[2];
+    }
+    for (let i = 0; i < this.booking.schedules.length; i++) {
+      this.orginalAmount=this.booking.schedules[i].bookingPrice;
+    }
     this.calculateTotal();
   }
 
@@ -49,6 +56,9 @@ export class UserDiscountApplyComponent implements OnInit {
   }
 
   onSubmit() {
+    this.booking.schedules.length=0;
+    this.booking.schedules.push(this.ownwardSchedule);
+    this.booking.schedules.push(this.returnSchedule);
     this.bookingService.addBooking(this.booking).subscribe((result) => {
       alert('Booking added succesfully');
       this.loginService.setCurrentBooking(new BookingViewmodel);
@@ -59,4 +69,6 @@ export class UserDiscountApplyComponent implements OnInit {
   calculateTotal(){
     this.totalAmount=this.orginalAmount-this.discountAmount;
   }
+
+  onReturnSeatChange(){}
 }

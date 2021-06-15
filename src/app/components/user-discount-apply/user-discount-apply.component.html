@@ -16,10 +16,9 @@
           <td>
               <label for="">Select Seat (Ownward Journey)</label></td>
           <td>
-            <select name="bookingOwnwardSeat" class="">
-              <option>None</option>
-              <option>Business Class</option>
-              <option>Economic Class</option>
+            <select name="bookingOwnwardSeat" class="" [(ngModel)]="ownwardSchedule.classType">              
+              <option value="Non-Business">Business Class</option>
+              <option value="Business">Economic Class</option>
             </select>
           </td>
           <td></td>
@@ -28,10 +27,10 @@
           <td>
               <label for="">Select Seat (Return Journey)</label></td>
           <td>
-            <select name="bookingReturnSeat" class="">              
-              <option>None</option>
-              <option>Business Class</option>
-              <option>Economic Class</option>
+            <select name="bookingReturnSeat" class="" (change)="onReturnSeatChange()"
+            [(ngModel)]="returnSchedule.classType">  
+              <option value="Non-Business">Business Class</option>
+              <option value="Business">Economic Class</option>
             </select>
           </td>
           <td></td>
@@ -44,7 +43,6 @@
       <input
         type="number"
         name="orginalAmount"
-        #orginalAmount="ngModel"
         [(ngModel)]="orginalAmount"
       />
     </div><div class="" style="text-align: left">
@@ -52,7 +50,6 @@
       <input
         type="number"
         name="discountAmount"
-        #discountAmount="ngModel"
         [(ngModel)]="discountAmount"
       />
     </div><div class="" style="text-align: left">
@@ -60,7 +57,6 @@
       <input
         type="text"
         name="totalAmount"
-        #totalAmount="ngModel"
         [(ngModel)]="totalAmount"
       />
     </div>
