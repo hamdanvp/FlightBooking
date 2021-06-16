@@ -54,7 +54,7 @@ export class MenuComponent implements OnInit {
       this.isLogin=true;
       this.logButtonName="Log Out";
       if(this.userData.isAdmin){
-        this.router.navigate(['/manageSchedule'])
+        this.router.navigate(['/manageSchedules'])
       }
     });
   }
