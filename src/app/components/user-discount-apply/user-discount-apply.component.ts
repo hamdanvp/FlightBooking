@@ -98,7 +98,7 @@ export class UserDiscountApplyComponent implements OnInit {
       }
       else{
         this.ownwardSchedule.bookingPrice=result.businessClassPrice;
-        this.ownwardSchedule.isBusinessClass=false;
+        this.ownwardSchedule.isBusinessClass=true;
         this.calculateOrginalPrice();
       }
     });    
@@ -113,7 +113,7 @@ export class UserDiscountApplyComponent implements OnInit {
       }
       else{
         this.returnSchedule.bookingPrice=result.businessClassPrice;
-        this.returnSchedule.isBusinessClass=false;
+        this.returnSchedule.isBusinessClass=true;
         this.calculateOrginalPrice();
       }
     });    
