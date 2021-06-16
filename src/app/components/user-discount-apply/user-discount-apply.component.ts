@@ -20,6 +20,7 @@ export class UserDiscountApplyComponent implements OnInit {
   orginalAmount: number = 0;
   totalAmount: number = 0;
   discountAmount: number = 0;
+  passengerCount: number = 0;
   discountList: [DiscountModel] = [new DiscountModel()];
   booking: BookingViewmodel = new BookingViewmodel();
   ownwardSchedule: ScheduleViewModel = new ScheduleViewModel();
@@ -37,6 +38,7 @@ export class UserDiscountApplyComponent implements OnInit {
     }
     this.getDiscountList();
     this.ownwardSchedule = this.booking.schedules[0];
+    this.passengerCount=this.booking.passengers.length;
     if (this.booking.schedules.length == 2) {
       this.isRoundTrip = true;
       this.returnSchedule = this.booking.schedules[1];
@@ -79,7 +81,7 @@ export class UserDiscountApplyComponent implements OnInit {
   }
 
   calculateOrginalPrice(){
-    this.orginalAmount=this.ownwardSchedule.bookingPrice+this.returnSchedule.bookingPrice;
+    this.orginalAmount=(this.ownwardSchedule.bookingPrice+this.returnSchedule.bookingPrice)*this.passengerCount;
     this.calculateTotal();
   }
 
