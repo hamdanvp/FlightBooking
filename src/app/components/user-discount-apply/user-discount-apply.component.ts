@@ -38,7 +38,7 @@ export class UserDiscountApplyComponent implements OnInit {
     }
     this.getDiscountList();
     this.ownwardSchedule = this.booking.schedules[0];
-    this.passengerCount=this.booking.passengers.length;
+    this.passengerCount = this.booking.passengers.length;
     if (this.booking.schedules.length == 2) {
       this.isRoundTrip = true;
       this.returnSchedule = this.booking.schedules[1];
@@ -80,8 +80,10 @@ export class UserDiscountApplyComponent implements OnInit {
     });
   }
 
-  calculateOrginalPrice(){
-    this.orginalAmount=(this.ownwardSchedule.bookingPrice+this.returnSchedule.bookingPrice)*this.passengerCount;
+  calculateOrginalPrice() {
+    this.orginalAmount =
+      (this.ownwardSchedule.bookingPrice + this.returnSchedule.bookingPrice) *
+      this.passengerCount;
     this.calculateTotal();
   }
 
@@ -89,33 +91,35 @@ export class UserDiscountApplyComponent implements OnInit {
     this.totalAmount = this.orginalAmount - this.discountAmount;
   }
 
-  ownwardScheduleChange(){
-    this.scheduleService.getScheduleById(this.ownwardSchedule.scheduleId).subscribe((result)=>{
-      if(this.ownwardSchedule.classType=="Non-Business"){
-        this.ownwardSchedule.bookingPrice=result.nonBusinessClassPrice;
-        this.ownwardSchedule.isBusinessClass=false;
-        this.calculateOrginalPrice();
-      }
-      else{
-        this.ownwardSchedule.bookingPrice=result.businessClassPrice;
-        this.ownwardSchedule.isBusinessClass=true;
-        this.calculateOrginalPrice();
-      }
-    });    
+  ownwardScheduleChange() {
+    this.scheduleService
+      .getScheduleById(this.ownwardSchedule.scheduleId)
+      .subscribe((result) => {
+        if (this.ownwardSchedule.classType == 'Non-Business') {
+          this.ownwardSchedule.bookingPrice = result.nonBusinessClassPrice;
+          this.ownwardSchedule.isBusinessClass = false;
+          this.calculateOrginalPrice();
+        } else {
+          this.ownwardSchedule.bookingPrice = result.businessClassPrice;
+          this.ownwardSchedule.isBusinessClass = true;
+          this.calculateOrginalPrice();
+        }
+      });
   }
 
-  returnScheduleChange(){
-    this.scheduleService.getScheduleById(this.ownwardSchedule.scheduleId).subscribe((result)=>{
-      if(this.returnSchedule.classType=="Non-Business"){
-        this.returnSchedule.bookingPrice=result.nonBusinessClassPrice;
-        this.returnSchedule.isBusinessClass=false;
-        this.calculateOrginalPrice();
-      }
-      else{
-        this.returnSchedule.bookingPrice=result.businessClassPrice;
-        this.returnSchedule.isBusinessClass=true;
-        this.calculateOrginalPrice();
-      }
-    });    
+  returnScheduleChange() {
+    this.scheduleService
+      .getScheduleById(this.ownwardSchedule.scheduleId)
+      .subscribe((result) => {
+        if (this.returnSchedule.classType == 'Non-Business') {
+          this.returnSchedule.bookingPrice = result.nonBusinessClassPrice;
+          this.returnSchedule.isBusinessClass = false;
+          this.calculateOrginalPrice();
+        } else {
+          this.returnSchedule.bookingPrice = result.businessClassPrice;
+          this.returnSchedule.isBusinessClass = true;
+          this.calculateOrginalPrice();
+        }
+      });
   }
 }

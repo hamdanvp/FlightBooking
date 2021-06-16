@@ -16,7 +16,7 @@ export class AddAirlineComponent implements OnInit {
     private router: Router,
     private airlineService: AirlineServiceService
   ) {
-    this.instrumentList=airlineService.getInstrument();
+    this.instrumentList = airlineService.getInstrument();
   }
 
   ngOnInit(): void {}

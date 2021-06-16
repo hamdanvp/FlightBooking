@@ -5,24 +5,21 @@ import { scheduleModel } from '../models/scheduleModel';
 import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ScheduleServiceService {
   baseUrl = environment.baseUrl;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getSchedules(searchModel?: any): Observable<[scheduleModel]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',
     });
     headers.append('Access-Control-Allow-Origin', '*');
-    return this.http.get<[scheduleModel]>(
-      this.baseUrl+'Schedule',
-      {
-        headers: headers,
-        params: searchModel,
-      }
-    );
+    return this.http.get<[scheduleModel]>(this.baseUrl + 'Schedule', {
+      headers: headers,
+      params: searchModel,
+    });
   }
 
   getScheduleById(id: string): Observable<scheduleModel> {
@@ -30,22 +27,20 @@ export class ScheduleServiceService {
       'Content-Type': 'application/json; charset=utf-8',
     });
     headers.append('Access-Control-Allow-Origin', '*');
-    const url = this.baseUrl+'Schedule/'+id;
-    return this.http.get<scheduleModel>(
-      url,
-      {
-        headers: headers
-      });
+    const url = this.baseUrl + 'Schedule/' + id;
+    return this.http.get<scheduleModel>(url, {
+      headers: headers,
+    });
   }
 
-  addSchedule(body:any): Observable<[any]> {
+  addSchedule(body: any): Observable<[any]> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Access-Control-Allow-Origin': '*'
-      })
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      }),
     };
-    const params=JSON.stringify(body);
-    return this.http.post<any>(this.baseUrl+'Schedule', params, httpOptions);
+    const params = JSON.stringify(body);
+    return this.http.post<any>(this.baseUrl + 'Schedule', params, httpOptions);
   }
 }

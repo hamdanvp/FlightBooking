@@ -6,17 +6,16 @@ import { DiscountServicesService } from 'src/app/services/discount-services.serv
 @Component({
   selector: 'app-add-discount',
   templateUrl: './add-discount.component.html',
-  styleUrls: ['./add-discount.component.css']
+  styleUrls: ['./add-discount.component.css'],
 })
 export class AddDiscountComponent implements OnInit {
-  model:DiscountModel=new DiscountModel();
+  model: DiscountModel = new DiscountModel();
   constructor(
-    private discountServices:DiscountServicesService,
-    private router:Router
-  ) { }
+    private discountServices: DiscountServicesService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
     if (this.model.couponCode.trim() != '') {
@@ -27,5 +26,4 @@ export class AddDiscountComponent implements OnInit {
       });
     }
   }
-
 }

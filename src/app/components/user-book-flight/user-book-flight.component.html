@@ -22,7 +22,7 @@
       />Round Trip</label
     >
   </div>
-  <div class="flex-row from-to" style="width: 50%;">
+  <div class="flex-row from-to" style="width: 50%">
     <div class="float-child">
       <label class="form-check-label">From:</label>
       <select
@@ -33,7 +33,12 @@
       >
         <option value=""></option>
         <ng-container *ngFor="let location of locationList">
-          <option *ngIf="location.locationName!=toLocation"  [ngValue]="location.locationName" >{{location.locationName}}</option>
+          <option
+            *ngIf="location.locationName != toLocation"
+            [ngValue]="location.locationName"
+          >
+            {{ location.locationName }}
+          </option>
         </ng-container>
       </select>
     </div>
@@ -47,9 +52,14 @@
       >
         <option value=""></option>
         <ng-container *ngFor="let location of locationList">
-          <option *ngIf="location.locationName!=fromLocation"  [ngValue]="location.locationName" >{{location.locationName}}</option>
+          <option
+            *ngIf="location.locationName != fromLocation"
+            [ngValue]="location.locationName"
+          >
+            {{ location.locationName }}
+          </option>
         </ng-container>
-      </select>      
+      </select>
     </div>
   </div>
   <br />
@@ -96,7 +106,8 @@
               <td>
                 <!-- Business Class:{{ ownwardJourney.businessClassPrice }} <br /> -->
                 Economy Class:{{ ownwardJourney.nonBusinessClassPrice }}<br />
-                Departure Date: {{ ownwardJourney.departureDate | date: 'YYYY-MM-dd HH:mm:ss'}}
+                Departure Date:
+                {{ ownwardJourney.departureDate | date: "YYYY-MM-dd HH:mm:ss" }}
               </td>
             </tr>
           </tbody>
@@ -157,7 +168,8 @@
               <td>
                 <!-- Business Class:{{ schedule.businessClassPrice }} <br /> -->
                 Economy Class:{{ schedule.nonBusinessClassPrice }}<br />
-                Departure Date: {{ schedule.departureDate | date: 'YYYY-MM-dd HH:mm:ss'}}
+                Departure Date:
+                {{ schedule.departureDate | date: "YYYY-MM-dd HH:mm:ss" }}
               </td>
             </tr>
           </tbody>

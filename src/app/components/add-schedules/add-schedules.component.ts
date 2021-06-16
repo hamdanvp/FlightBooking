@@ -7,7 +7,7 @@ import { ScheduleServiceService } from 'src/app/services/schedule-service.servic
 @Component({
   selector: 'app-add-schedules',
   templateUrl: './add-schedules.component.html',
-  styleUrls: ['./add-schedules.component.css']
+  styleUrls: ['./add-schedules.component.css'],
 })
 export class AddSchedulesComponent implements OnInit {
   model: scheduleModel = new scheduleModel();
@@ -16,17 +16,16 @@ export class AddSchedulesComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private scheduleService:ScheduleServiceService,
+    private scheduleService: ScheduleServiceService,
     private airlineServices: AirlineServiceService
-  ) { 
-    this.locationList=airlineServices.getLocation();
+  ) {
+    this.locationList = airlineServices.getLocation();
     airlineServices.getAirlines().subscribe((result) => {
       this.airlineList = result;
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
     if (this.model.flightNo.trim() != '') {
@@ -37,5 +36,4 @@ export class AddSchedulesComponent implements OnInit {
       });
     }
   }
-
 }

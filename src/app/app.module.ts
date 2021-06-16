@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common'
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -13,7 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
-import {LoginServiceService} from './services/login-service.service'
+import { LoginServiceService } from './services/login-service.service';
 
 import { AppComponent } from './app.component';
 import { UserBookingHistoryComponent } from './components/user-booking-history/user-booking-history.component';
@@ -67,7 +67,7 @@ import { ViewBookingDetailsComponent } from './components/view-booking-details/v
     MatDialogModule,
     MatButtonModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [LoginServiceService],
   bootstrap: [AppComponent],

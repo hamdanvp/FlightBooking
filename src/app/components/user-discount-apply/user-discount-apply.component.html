@@ -1,17 +1,21 @@
 <div class="contents">
   <div>
-    <table class="table" style="width: auto;">
+    <table class="table" style="width: auto">
       <tr>
         <td>
           <label for="">Discounte Code</label>
         </td>
         <td>
           <!-- <input type="text" name="discountCode" id="" [(ngModel)]="discountCode" /> -->
-          <select name="discountCode" id="discountCode" [(ngModel)]="discountCode">
+          <select
+            name="discountCode"
+            id="discountCode"
+            [(ngModel)]="discountCode"
+          >
             <option value=""></option>
             <option
               *ngFor="let discount of discountList"
-              value="{{discount.couponCode}}"
+              value="{{ discount.couponCode }}"
             >
               {{ discount.couponCode }}
             </option>

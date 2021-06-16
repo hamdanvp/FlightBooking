@@ -18,13 +18,10 @@ export class BookingServiceService {
       'Content-Type': 'application/json; charset=utf-8',
     });
     headers.append('Access-Control-Allow-Origin', '*');
-    return this.http.get<[BookingModel]>(
-      this.baseUrl+'Booking',
-      {
-        headers: headers,
-        params: searchModel,
-      }
-    );
+    return this.http.get<[BookingModel]>(this.baseUrl + 'Booking', {
+      headers: headers,
+      params: searchModel,
+    });
   }
 
   getBookingById(bookingId: string): Observable<BookingModel> {
@@ -32,7 +29,7 @@ export class BookingServiceService {
       'Content-Type': 'application/json; charset=utf-8',
     });
     headers.append('Access-Control-Allow-Origin', '*');
-    const url = this.baseUrl+'Booking/' + bookingId;
+    const url = this.baseUrl + 'Booking/' + bookingId;
     return this.http.get<BookingModel>(url, {
       headers: headers,
     });
@@ -43,7 +40,7 @@ export class BookingServiceService {
       'Content-Type': 'application/json; charset=utf-8',
     });
     headers.append('Access-Control-Allow-Origin', '*');
-    const url = this.baseUrl+'Booking/GetPassengersByBookingId/' + bookingId;
+    const url = this.baseUrl + 'Booking/GetPassengersByBookingId/' + bookingId;
     return this.http.get<[PassengerModel]>(url, {
       headers: headers,
     });
@@ -54,8 +51,8 @@ export class BookingServiceService {
       'Content-Type': 'application/json; charset=utf-8',
     });
     headers.append('Access-Control-Allow-Origin', '*');
-    const url = this.baseUrl+'Booking/CancelBookingById/' + bookingId;
-    return this.http.put<[PassengerModel]>(url,null, {
+    const url = this.baseUrl + 'Booking/CancelBookingById/' + bookingId;
+    return this.http.put<[PassengerModel]>(url, null, {
       headers: headers,
     });
   }
@@ -68,10 +65,6 @@ export class BookingServiceService {
       }),
     };
     const params = JSON.stringify(body);
-    return this.http.post<[any]>(
-      this.baseUrl+'Booking',
-      params,
-      httpOptions
-    );
+    return this.http.post<[any]>(this.baseUrl + 'Booking', params, httpOptions);
   }
 }

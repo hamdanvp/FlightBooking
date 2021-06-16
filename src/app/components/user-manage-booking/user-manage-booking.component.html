@@ -24,7 +24,9 @@
           {{ booking.airlineSchedule?.departureDate | date: "dd/MM/yyy hh:mm" }}
         </td>
         <td>
-          <button class="btn" (click)="viewBookingDetails(booking.id)">View</button>
+          <button class="btn" (click)="viewBookingDetails(booking.id)">
+            View
+          </button>
           <button class="btn">Download</button>
           <button
             class="btn"

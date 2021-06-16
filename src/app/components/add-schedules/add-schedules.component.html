@@ -23,24 +23,30 @@
       <label for="">From</label>
       <select name="from" [(ngModel)]="model.from" class="form-control">
         <option value=""></option>
-        <option
-          *ngFor="let location of locationList"
-          value="{{ location.locationName }}"
-        >
-          {{ location.locationName }}
-        </option>
+
+        <ng-container *ngFor="let location of locationList">
+          <option
+            *ngIf="location.locationName != model.to"
+            [ngValue]="location.locationName"
+          >
+            {{ location.locationName }}
+          </option>
+        </ng-container>
       </select>
     </div>
     <div class="form-group">
       <label for="">To</label>
       <select name="to" [(ngModel)]="model.to" class="form-control">
         <option value=""></option>
-        <option
-          *ngFor="let location of locationList"
-          value="{{ location.locationName }}"
-        >
-          {{ location.locationName }}
-        </option>
+
+        <ng-container *ngFor="let location of locationList">
+          <option
+            *ngIf="location.locationName != model.from"
+            [ngValue]="location.locationName"
+          >
+            {{ location.locationName }}
+          </option>
+        </ng-container>
       </select>
     </div>
     <div class="form-group">
@@ -97,7 +103,11 @@
     </div>
     <div class="form-group">
       <label>Select Airline</label>
-      <select name="airline" [(ngModel)]="model.airline.id" class="form-control">
+      <select
+        name="airline"
+        [(ngModel)]="model.airline.id"
+        class="form-control"
+      >
         <option value=""></option>
         <option *ngFor="let airline of airlineList" value="{{ airline.id }}">
           {{ airline.airlineName }}

@@ -1,58 +1,91 @@
-<div class="subHeading">
-    Sign Up
-</div>
+<div class="subHeading">Sign Up</div>
 <div class="contents">
-    <form  #addUserForm="ngForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="">First Name: </label>
-            <input
-              type="text"
-              id="firstName"
-              name="firstName"
-              class="form-control"
-              [(ngModel)]="model.firstName"
-            />
-          </div>
-          <div class="form-group">
-            <label for="">Last Name</label>
-            <input
-              type="text"
-              id="lastName"
-              name="lastName"
-              class="form-control"
-              [(ngModel)]="model.lastName"
-            />
-            <div class="form-group">
-              <label for="">Username</label>
-              <input
-                type="text"
-                id="userName"
-                name="userName"
-                class="form-control"
-                [(ngModel)]="model.userName"
-              />
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              class="form-control"
-              [(ngModel)]="model.password"
-            />
-          </div>
-          <div class="form-group">
-            <label for="">Confirm Password</label>
-            <input
-              type="password"
-              id="confirmPasword"
-              name="confirmPasword"
-              class="form-control"
-              [(ngModel)]="model.confirmPasword"
-            />
-          </div>
-          <input type="submit" value="Sign Up" class="btn btn-primary" />
-    </form>
+  <form #addUserForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="">First Name: </label>
+      <input
+        type="text"
+        #firstName="ngModel"
+        name="firstName"
+        class="form-control"
+        [(ngModel)]="model.firstName"
+        [class.is-invalid]="firstName.invalid && firstName.touched"
+        required
+      />
+      <small
+        class="text-danger"
+        [class.d-none]="firstName.valid || firstName.untouched"
+        >This is require field</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="">Last Name</label>
+      <input
+        type="text"
+        #lastName="ngModel"
+        name="lastName"
+        class="form-control"
+        [(ngModel)]="model.lastName"
+        [class.is-invalid]="lastName.invalid && lastName.touched"
+        required
+      />
+      <small
+        class="text-danger"
+        [class.d-none]="lastName.valid || lastName.untouched"
+        >This is require field</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="">Username</label>
+      <input
+        type="text"
+        #userName="ngModel"
+        name="userName"
+        class="form-control"
+        [(ngModel)]="model.userName"
+        [class.is-invalid]="userName.invalid && userName.touched"
+        required
+      />
+      <small
+        class="text-danger"
+        [class.d-none]="userName.valid || userName.untouched"
+        >This is require field</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="">Password</label>
+      <input
+        type="password"
+        #password="ngModel"
+        name="password"
+        class="form-control"
+        [(ngModel)]="model.password"
+        [class.is-invalid]="password.invalid && password.touched"
+        pattern=".{8,}"
+        required
+      />
+      <div *ngIf="password.errors && (password.invalid && password.touched)">
+          <small class="text-danger" *ngIf="password.errors.required">Please enter password.</small>
+          <small class="text-danger" *ngIf="password.errors.pattern">Password shoulde be Minimum 8 charactersr</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="">Confirm Password</label>
+      <input
+        type="password"
+        #confirmPasword="ngModel"
+        name="confirmPasword"
+        class="form-control"
+        [(ngModel)]="model.confirmPasword"
+        pattern=".{8,}"
+        required
+        [class.is-invalid]="confirmPasword.invalid && confirmPasword.touched"
+      />
+      <div *ngIf="confirmPasword.errors && (confirmPasword.invalid && confirmPasword.touched)">
+          <small class="text-danger" *ngIf="confirmPasword.errors.required">Please enter confirm password.</small>
+          <small class="text-danger" *ngIf="confirmPasword.errors.pattern">Password shoulde be Minimum 8 charactersr</small>
+      </div>
+    </div>
+    <input [disabled]="addUserForm.invalid" type="submit" value="Sign Up" class="btn btn-primary" />
+  </form>
 </div>

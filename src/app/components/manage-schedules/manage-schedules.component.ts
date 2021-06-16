@@ -12,16 +12,18 @@ export class ManageSchedulesComponent implements OnInit {
   public airlineList: any[] = [];
   public instrumentList: any[] = [];
   public locationList: any[] = [];
-  searchModel={
-    airlineName:'',
-    flightNo:'',
-    isAdmin:true,
-    instrumentUsed:''
-  }
-  constructor(private airlineService: AirlineServiceService,
-    private scheduleService:ScheduleServiceService) {
-      this.instrumentList=airlineService.getInstrument();
-      this.locationList=airlineService.getLocation();
+  searchModel = {
+    airlineName: '',
+    flightNo: '',
+    isAdmin: true,
+    instrumentUsed: '',
+  };
+  constructor(
+    private airlineService: AirlineServiceService,
+    private scheduleService: ScheduleServiceService
+  ) {
+    this.instrumentList = airlineService.getInstrument();
+    this.locationList = airlineService.getLocation();
     airlineService.getAirlines().subscribe((result) => {
       this.airlineList = result;
     });
@@ -30,7 +32,7 @@ export class ManageSchedulesComponent implements OnInit {
     });
   }
 
-  onSearch(){    
+  onSearch() {
     this.scheduleService.getSchedules(this.searchModel).subscribe((result) => {
       this.scheduleList = result;
     });

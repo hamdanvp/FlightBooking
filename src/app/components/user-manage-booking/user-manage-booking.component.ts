@@ -43,8 +43,8 @@ export class UserManageBookingComponent implements OnInit {
     else return true;
   }
 
-  viewBookingDetails(bookingId:string){
-    this.router.navigate(['bookingView/'+bookingId])
+  viewBookingDetails(bookingId: string) {
+    this.router.navigate(['bookingView/' + bookingId]);
   }
 
   cancelBookingById(bookingId: string) {

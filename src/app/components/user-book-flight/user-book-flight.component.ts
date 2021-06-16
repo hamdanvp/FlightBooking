@@ -23,8 +23,8 @@ import { Router } from '@angular/router';
 })
 export class UserBookFlightComponent implements OnInit {
   public ownwardJourneyList: any[] = [];
-  public returnJourneyList:  any[] = [];
-  public locationList:  any[] = [];
+  public returnJourneyList: any[] = [];
+  public locationList: any[] = [];
   public totalPrice: number = 0;
   public oneWayPrice: number = 0;
   public returnPrice: number = 0;
@@ -40,44 +40,51 @@ export class UserBookFlightComponent implements OnInit {
   returnSchedule: ScheduleViewModel = new ScheduleViewModel();
   public onwardDate: Date = new Date();
   public returnDate: Date = new Date();
-  booking:BookingViewmodel=new BookingViewmodel();
+  booking: BookingViewmodel = new BookingViewmodel();
 
   constructor(
     private scheduleService: ScheduleServiceService,
     private airlineService: AirlineServiceService,
     private dialog: MatDialog,
-    private router:Router,
+    private router: Router,
     private logService: LoginServiceService
   ) {
-    
-    this.locationList=airlineService.getLocation();
+    this.locationList = airlineService.getLocation();
     this.getOwnwardJourney();
-    this.setReturnPrice = function (index: Number, returnPrice: number,scheduleId:string) {
+    this.setReturnPrice = function (
+      index: Number,
+      returnPrice: number,
+      scheduleId: string
+    ) {
       if (this.selectedReturnRowIndex == index) {
         this.selectedReturnRowIndex = -1;
         this.returnPrice = 0;
-        this.returnSchedule.scheduleId='';
-        this.returnSchedule.bookingPrice=0;
+        this.returnSchedule.scheduleId = '';
+        this.returnSchedule.bookingPrice = 0;
       } else {
         this.selectedReturnRowIndex = index;
         this.returnPrice = returnPrice;
-        this.returnSchedule.scheduleId=scheduleId;
-        this.returnSchedule.bookingPrice=returnPrice;
+        this.returnSchedule.scheduleId = scheduleId;
+        this.returnSchedule.bookingPrice = returnPrice;
       }
       this.calculateTotal();
     };
 
-    this.setOnewayPrice = function (index: Number, price: number,scheduleId:string) {
+    this.setOnewayPrice = function (
+      index: Number,
+      price: number,
+      scheduleId: string
+    ) {
       if (this.selectedOneWayRowIndex == index) {
         this.selectedOneWayRowIndex = -1;
         this.oneWayPrice = 0;
-        this.ownwardSchedule.bookingPrice=0;
-        this.ownwardSchedule.scheduleId='';
+        this.ownwardSchedule.bookingPrice = 0;
+        this.ownwardSchedule.scheduleId = '';
       } else {
         this.selectedOneWayRowIndex = index;
         this.oneWayPrice = price;
-        this.ownwardSchedule.scheduleId=scheduleId;
-        this.ownwardSchedule.bookingPrice=price;
+        this.ownwardSchedule.scheduleId = scheduleId;
+        this.ownwardSchedule.bookingPrice = price;
       }
       this.calculateTotal();
     };
@@ -117,48 +124,51 @@ export class UserBookFlightComponent implements OnInit {
   }
 
   fromLocationChange() {
-      if (this.toLocation.trim() == '') return;
-      else {
-        this.getOwnwardJourney();
-        if (this.tripType == 'roundTrip') {
-          this.getReturnJourney();
-        }
+    if (this.toLocation.trim() == '') return;
+    else {
+      this.getOwnwardJourney();
+      if (this.tripType == 'roundTrip') {
+        this.getReturnJourney();
       }
+    }
   }
 
   toLocationChange() {
-      if (this.fromLocation.trim() == '') return;
-      else {
-        this.getOwnwardJourney();
-        if (this.tripType == 'roundTrip') {
-          this.getReturnJourney();
-        }
+    if (this.fromLocation.trim() == '') return;
+    else {
+      this.getOwnwardJourney();
+      if (this.tripType == 'roundTrip') {
+        this.getReturnJourney();
       }
+    }
   }
 
   public openDiscountDialog(): void {
-    this.booking.schedules.length=0;
-    if(this.ownwardSchedule.scheduleId.trim()==''){
-      alert("Please select ownward journey");
+    this.booking.schedules.length = 0;
+    if (this.ownwardSchedule.scheduleId.trim() == '') {
+      alert('Please select ownward journey');
       return;
-    }
-    else{
+    } else {
       this.booking.schedules.push(this.ownwardSchedule);
     }
-    if(this.returnSchedule.scheduleId.trim()=='' && this.tripType=='roundTrip'){
+    if (
+      this.returnSchedule.scheduleId.trim() == '' &&
+      this.tripType == 'roundTrip'
+    ) {
       alert('Please select return journey');
       return;
-    }
-    else if(this.returnSchedule.scheduleId.trim()!='' && this.tripType=='roundTrip'){
+    } else if (
+      this.returnSchedule.scheduleId.trim() != '' &&
+      this.tripType == 'roundTrip'
+    ) {
       this.booking.schedules.push(this.returnSchedule);
     }
 
-    
-    let userData: any=this.logService.getUser();
+    let userData: any = this.logService.getUser();
     if (userData != null) {
-      this.booking.userId=userData.id;
+      this.booking.userId = userData.id;
       this.logService.setCurrentBooking(this.booking);
-      this.router.navigate(['/addPassenger'])
+      this.router.navigate(['/addPassenger']);
     } else {
       alert('Please login.');
       return;
@@ -167,12 +177,11 @@ export class UserBookFlightComponent implements OnInit {
 
   changeTripType(event: any) {
     this.tripType = event.target.value;
-    if(this.tripType=='roundTrip'){
+    if (this.tripType == 'roundTrip') {
       this.getReturnJourney();
-    }
-    else{
-      this.returnSchedule.scheduleId='';
-      this.returnPrice=0;
+    } else {
+      this.returnSchedule.scheduleId = '';
+      this.returnPrice = 0;
       this.calculateTotal();
     }
   }

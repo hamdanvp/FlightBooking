@@ -17,12 +17,9 @@ export class AirlineServiceService {
       'Content-Type': 'application/json; charset=utf-8',
     });
     headers.append('Access-Control-Allow-Origin', '*');
-    return this.http.get<[AirlineModel]>(
-      this.baseUrl+'Airline',
-      {
-        headers: headers,
-      }
-    );
+    return this.http.get<[AirlineModel]>(this.baseUrl + 'Airline', {
+      headers: headers,
+    });
   }
 
   addAirlines(body: any): Observable<[any]> {
@@ -33,11 +30,7 @@ export class AirlineServiceService {
       }),
     };
     const params = JSON.stringify(body);
-    return this.http.post<any>(
-      this.baseUrl+'Airline',
-      params,
-      httpOptions
-    );
+    return this.http.post<any>(this.baseUrl + 'Airline', params, httpOptions);
   }
 
   getLocation() {
