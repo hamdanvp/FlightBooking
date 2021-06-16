@@ -1,12 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+
 import { DiscountModel } from '../models/discountModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DiscountServicesService {
+  baseUrl = environment.baseUrl;
   constructor(private http: HttpClient) {}
 
   getDiscount(searchModel?:any): Observable<[DiscountModel]> {
@@ -15,7 +18,7 @@ export class DiscountServicesService {
     });
     headers.append('Access-Control-Allow-Origin', '*');
     return this.http.get<[DiscountModel]>(
-      'https://localhost:44318/api/Discount',
+      this.baseUrl+'Discount',
       {
         headers: headers,
         params:searchModel
@@ -28,7 +31,7 @@ export class DiscountServicesService {
       'Content-Type': 'application/json; charset=utf-8',
     });
     headers.append('Access-Control-Allow-Origin', '*');
-    const url = 'https://localhost:44318/api/Discount/GetCouponByCode/'+code;
+    const url = this.baseUrl+'Discount/GetCouponByCode/'+code;
     return this.http.get<DiscountModel>(
       url,
       {
@@ -45,6 +48,6 @@ export class DiscountServicesService {
       })
     };
     const params=JSON.stringify(body);
-    return this.http.post<any>('https://localhost:44318/api/Discount', params, httpOptions);
+    return this.http.post<any>(this.baseUrl+'api/Discount', params, httpOptions);
   }
 }

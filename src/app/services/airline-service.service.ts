@@ -1,12 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+
 import { AirlineModel } from '../models/airlineModel';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AirlineServiceService {
+  baseUrl = environment.baseUrl;
   constructor(private http: HttpClient) {}
 
   getAirlines(): Observable<[AirlineModel]> {
@@ -15,7 +18,7 @@ export class AirlineServiceService {
     });
     headers.append('Access-Control-Allow-Origin', '*');
     return this.http.get<[AirlineModel]>(
-      'https://localhost:44318/api/Airline',
+      this.baseUrl+'Airline',
       {
         headers: headers,
       }
@@ -31,7 +34,7 @@ export class AirlineServiceService {
     };
     const params = JSON.stringify(body);
     return this.http.post<any>(
-      'https://localhost:44318/api/Airline',
+      this.baseUrl+'Airline',
       params,
       httpOptions
     );

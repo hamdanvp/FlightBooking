@@ -1,14 +1,16 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+
 import { BookingModel } from '../models/bookingModel';
-import { BookingViewmodel } from '../models/bookingViewmodel';
 import { PassengerModel } from '../models/passengerModel';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookingServiceService {
+  baseUrl = environment.baseUrl;
   constructor(private http: HttpClient) {}
 
   getBookings(searchModel?: any): Observable<[BookingModel]> {
@@ -17,7 +19,7 @@ export class BookingServiceService {
     });
     headers.append('Access-Control-Allow-Origin', '*');
     return this.http.get<[BookingModel]>(
-      'https://localhost:44318/api/Booking',
+      this.baseUrl+'Booking',
       {
         headers: headers,
         params: searchModel,
@@ -30,7 +32,7 @@ export class BookingServiceService {
       'Content-Type': 'application/json; charset=utf-8',
     });
     headers.append('Access-Control-Allow-Origin', '*');
-    const url = 'https://localhost:44318/api/Booking/' + bookingId;
+    const url = this.baseUrl+'Booking/' + bookingId;
     return this.http.get<BookingModel>(url, {
       headers: headers,
     });
@@ -41,7 +43,7 @@ export class BookingServiceService {
       'Content-Type': 'application/json; charset=utf-8',
     });
     headers.append('Access-Control-Allow-Origin', '*');
-    const url = 'https://localhost:44318/api/Booking/GetPassengersByBookingId/' + bookingId;
+    const url = this.baseUrl+'Booking/GetPassengersByBookingId/' + bookingId;
     return this.http.get<[PassengerModel]>(url, {
       headers: headers,
     });
@@ -52,7 +54,7 @@ export class BookingServiceService {
       'Content-Type': 'application/json; charset=utf-8',
     });
     headers.append('Access-Control-Allow-Origin', '*');
-    const url = 'https://localhost:44318/api/Booking/CancelBookingById/' + bookingId;
+    const url = this.baseUrl+'Booking/CancelBookingById/' + bookingId;
     return this.http.put<[PassengerModel]>(url,null, {
       headers: headers,
     });
@@ -67,7 +69,7 @@ export class BookingServiceService {
     };
     const params = JSON.stringify(body);
     return this.http.post<[any]>(
-      'https://localhost:44318/api/Booking',
+      this.baseUrl+'Booking',
       params,
       httpOptions
     );
