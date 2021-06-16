@@ -1,1 +1,58 @@
-<p>sign-up works!</p>
+<div class="subHeading">
+    Sign Up
+</div>
+<div class="contents">
+    <form  #addUserForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="">First Name: </label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              class="form-control"
+              [(ngModel)]="model.firstName"
+            />
+          </div>
+          <div class="form-group">
+            <label for="">Last Name</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              class="form-control"
+              [(ngModel)]="model.lastName"
+            />
+            <div class="form-group">
+              <label for="">Username</label>
+              <input
+                type="text"
+                id="userName"
+                name="userName"
+                class="form-control"
+                [(ngModel)]="model.userName"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              [(ngModel)]="model.password"
+            />
+          </div>
+          <div class="form-group">
+            <label for="">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPasword"
+              name="confirmPasword"
+              class="form-control"
+              [(ngModel)]="model.confirmPasword"
+            />
+          </div>
+          <input type="submit" value="Add" class="btn btn-primary" />
+    </form>
+</div>

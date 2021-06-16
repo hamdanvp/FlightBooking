@@ -49,6 +49,7 @@ export class UserBookFlightComponent implements OnInit {
     private router:Router,
     private logService: LoginServiceService
   ) {
+    
     this.locationList=airlineService.getLocation();
     this.getOwnwardJourney();
     this.setReturnPrice = function (index: Number, returnPrice: number,scheduleId:string) {

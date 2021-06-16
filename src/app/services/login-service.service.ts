@@ -39,5 +39,20 @@ private userData:any;
     return this.http.get<UserModel>('https://localhost:44318/api/User/Login/'+username+'/'+password,{headers: headers})
   }
 
+  addUser(body: any): Observable<[any]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      }),
+    };
+    const params = JSON.stringify(body);
+    return this.http.post<any>(
+      'https://localhost:44318/api/User',
+      params,
+      httpOptions
+    );
+  }
+
 
 }

@@ -3,6 +3,7 @@ export class UserModel{
      firstName:string="";
      lastName:string="";
      password:string="";
+     confirmPasword:string="";
      userName:string="";
      isAdmin:boolean=false;
      getFullName() {
