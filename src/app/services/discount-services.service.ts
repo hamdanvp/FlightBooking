@@ -48,6 +48,6 @@ export class DiscountServicesService {
       })
     };
     const params=JSON.stringify(body);
-    return this.http.post<any>(this.baseUrl+'api/Discount', params, httpOptions);
+    return this.http.post<any>(this.baseUrl+'Discount', params, httpOptions);
   }
 }
