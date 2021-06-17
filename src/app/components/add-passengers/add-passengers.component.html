@@ -20,7 +20,22 @@
         name="contactNumber"
         class="form-control"
         [(ngModel)]="model.contactNumber"
+        pattern="^\d{10}$"
+        [class.is-invalid]="contactNumber.invalid && contactNumber.touched"
       />
+      <div
+        *ngIf="
+          contactNumber.errors &&
+          (contactNumber.invalid && contactNumber.touched)
+        "
+      >
+        <small class="text-danger" *ngIf="contactNumber.errors.required"
+          >This is required field</small
+        >
+        <small class="text-danger" *ngIf="contactNumber.errors.pattern"
+          >Invalid phone number</small
+        >
+      </div>
     </div>
     <div class="form-group">
       <label for="">Address</label>
